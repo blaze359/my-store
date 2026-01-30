@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { getCategories } from "../actions/categories";
+import { getCategories } from "../actions/api";
 
 interface Category {
   _id: number;
