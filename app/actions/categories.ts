@@ -1,8 +1,10 @@
 'use server';
 
+const baseURL = "https://fakestoreapiserver.reactbd.org/api/";
+
 export const getCategories = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/categories`, {
+    const res = await fetch(`${baseURL}categories`, {
       cache: 'no-store',
     });
     
