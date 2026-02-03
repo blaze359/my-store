@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "task": "Home Page: Add description and to-do to home page.",
+    "status": "done"
+  },
+  {
+    "id": 2,
+    "task": "Header: adjust hover color on navigation menu items.",
+    "status": "open"
+  },
+  {
+    "id": 3,
+    "task": "Header: Implement Mini Cart functionality.",
+    "status": "open"
+  },
+  {
+    "id": 4,
+    "task": "Header: Add top bar with language navigation.",
+    "status": "open"
+  },
+  {
+    "id": 5,
+    "task": "PLP: Improve styling of cards and correct colors and hover effects.",
+    "status": "open"
+  },
+  {
+    "id": 6,
+    "task": "Footer: Add footer with link back to profile site.",
+    "status": "open"
+  },
+  {
+    "id": 7,
+    "task": "PDP: Improve styling of PDP page.",
+    "status": "open"
+  },
+  {
+    "id": 8,
+    "task": "PDP: Image carousel padding for progress bar and only show if multiple images.",
+    "status": "open"
+  },
+  {
+    "id": 9,
+    "task": "Saved Carts: Display saved carts on user profile page.",
+    "status": "open"
+  },
+  {
+    "id": 10,
+    "task": "Saved Carts: Add functionality to load a saved cart into the current cart.",
+    "status": "open"
+  },
+  {
+    "id": 11,
+    "task": "Cart: Improve styling and add section on right for General cart details.",
+    "status": "open"
+  },
+  {
+    "id": 12,
+    "task": "General: Add and implement currency formatting utility.",
+    "status": "open"
+  },
+  {
+    "id": 13,
+    "task": "Checkout: Implement fake checkout process with form validation.",
+    "status": "open"
+  },
+  {
+    "id": 14,
+    "task": "General: Implement dark mode.",
+    "status": "open"
+  },
+  {
+    "id": 15,
+    "task": "General: Add translations where needed.",
+    "status": "open"
+  }
+]
