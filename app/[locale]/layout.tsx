@@ -6,11 +6,10 @@ import "../globals.css";
 import Nav from "@/components/Nav/Nav";
 import Image from "next/image";
 import Link from "next/link";
-import Search from "@/components/Nav/search";
+import Search from "@/components/Nav/Search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
-import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 
 type Locale = (typeof routing.locales)[number];
 

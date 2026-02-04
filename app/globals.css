@@ -121,5 +121,23 @@
   }
   body {
     @apply bg-background text-foreground;
+
   }
+
+  body[data-scroll-locked] {
+  margin-right: auto !important;
+  margin-left: auto !important;
+  padding-right: 16px !important;
+  padding-left: 16px !important;
+}
+
+html[data-scroll-locked],
+html {
+  padding-right: 16px !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  padding-left: 16px !important;
+}
+
+  
 }

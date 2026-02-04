@@ -18,6 +18,13 @@ const nextConfig: NextConfig = {
         pathname: "/icon/**",
         search: "",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.dummyjson.com",
+        port: "",
+        pathname: "/products/images/**",
+        search: "",
+      },
     ],
   },
 };

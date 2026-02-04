@@ -1,5 +1,7 @@
 {
   "Home": {
-    "title": "Mi tienda"
+    "title": "Bienvenido a mi prueba de concepto de comercio electrónico.",
+    "description": "Este es un sitio web de comercio electrónico de prueba, desarrollado con Next.js y TypeScript. El diseño se realizó utilizando Tailwind CSS y componentes de ShadCN UI. El sitio incluye una página de listado de productos (PLP), una página de detalles del producto (PDP) y un carrito de compras con función para guardar el carrito. La gestión del estado se realiza con Mobx. No dudes en explorar el sitio y consultar el código en mi perfil de GitHub. Este proyecto está en desarrollo y hay varias funciones y mejoras planificadas para el futuro.",
+    "toDoList": "Lista de tareas"
   }
 }

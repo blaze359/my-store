@@ -44,7 +44,7 @@ export default async function HomePage() {
       <div className="flex flex-col gap-4 mt-6">
         <div className="flex items-center gap-2">
           <FontAwesomeIcon icon={faListCheck} className="w-10 h-10" />
-          <p>To Do List:</p>
+          <p>{t("toDoList")}:</p>
         </div>
         {toDoList.map((item) => (
           <div key={item.id} className="flex gap-4 items-center">

@@ -42,12 +42,12 @@
   {
     "id": 9,
     "task": "Saved Carts: Display saved carts on user profile page.",
-    "status": "open"
+    "status": "done"
   },
   {
     "id": 10,
     "task": "Saved Carts: Add functionality to load a saved cart into the current cart.",
-    "status": "open"
+    "status": "done"
   },
   {
     "id": 11,
@@ -72,6 +72,6 @@
   {
     "id": 15,
     "task": "General: Add translations where needed.",
-    "status": "open"
+    "status": "started"
   }
 ]
