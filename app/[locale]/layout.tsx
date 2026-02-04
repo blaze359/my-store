@@ -10,6 +10,7 @@ import Search from "@/components/Nav/search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 
 type Locale = (typeof routing.locales)[number];
 
@@ -33,8 +34,39 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <NextIntlClientProvider messages={messages}>
-        <body className="container mx-auto my-4 px-4">
-          <div className="flex justify-between align-top">
+        <body className="container mx-auto mb-4 px-4">
+          <div className="relative w-screen left-1/2 -ml-[50vw] -mr-[50vw] right-1/2 bg-primary text-white">
+            <div className="container mx-auto flex justify-end p-2">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="bg-primary">English</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <NavigationMenuLink
+                        href={`/en`}
+                        className="w-35 hover:bg-secondary hover:font-bold"
+                      >
+                        English
+                      </NavigationMenuLink>
+                      <NavigationMenuLink
+                        href={`/es`}
+                        className="w-35 hover:bg-secondary hover:font-bold"
+                      >
+                        Spanish
+                      </NavigationMenuLink>
+                      <NavigationMenuLink
+                        href={`/fr`}
+                        className="w-35 hover:bg-secondary hover:font-bold"
+                      >
+                        French
+                      </NavigationMenuLink>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
+          </div>
+          <div className="flex justify-between align-top mt-4">
             <Link href={`/${locale}`}>
               <Image
                 src="/logo-image.jpg"
@@ -50,10 +82,16 @@ export default async function LocaleLayout({
                   <NavigationMenuItem>
                     <NavigationMenuTrigger>My Account</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <NavigationMenuLink href={`/${locale}/my-account`} className="w-35 hover:bg-secondary hover:font-bold">
+                      <NavigationMenuLink
+                        href={`/${locale}/my-account`}
+                        className="w-35 hover:bg-secondary hover:font-bold"
+                      >
                         My Profile
                       </NavigationMenuLink>
-                      <NavigationMenuLink href={`/${locale}/my-account/saved-carts`} className="w-35 hover:bg-secondary hover:font-bold">
+                      <NavigationMenuLink
+                        href={`/${locale}/my-account/saved-carts`}
+                        className="w-35 hover:bg-secondary hover:font-bold"
+                      >
                         My Saved Carts
                       </NavigationMenuLink>
                     </NavigationMenuContent>
@@ -66,6 +104,7 @@ export default async function LocaleLayout({
             </div>
           </div>
           <Nav />
+          <div className="container border-b-2 border-primary"/>
           {children}
         </body>
       </NextIntlClientProvider>
