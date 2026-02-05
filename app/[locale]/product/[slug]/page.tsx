@@ -1,5 +1,6 @@
 import { getProduct } from "@/app/actions/api";
 import AddToCartButton from "@/components/AddToCartButton";
+import ProductImageCarousel from "@/components/pdp/ProductImageCarousel";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, CarouselProgress } from "@/components/ui/carousel";
 import { StarRating } from "@/components/ui/StarRating";
 import Image from "next/image";
@@ -13,25 +14,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   return (
     <div className="flex flex-row my-6 gap-10 mx-6">
-      <Carousel className="w-100 mt-4">
-        <CarouselContent>
-          {product.images.map((image: string, index: number) => (
-            <CarouselItem key={index}>
-              <Image
-                src={image}
-                alt={`${product.title} image ${index + 1}`}
-                width={300}
-                height={300}
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <div className="flex justify-between gap-2">
-          <CarouselPrevious />
-          <CarouselProgress />
-          <CarouselNext />
-        </div>
-      </Carousel>
+      <ProductImageCarousel images={product.images} />
       <div>
         <p>{product.brand}</p>
         <h2 className="text-2xl font-bold">{product.title}</h2>
