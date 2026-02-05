@@ -3,13 +3,14 @@ import AddToCartButton from "@/components/AddToCartButton";
 import ProductImageCarousel from "@/components/pdp/ProductImageCarousel";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, CarouselProgress } from "@/components/ui/carousel";
 import { StarRating } from "@/components/ui/StarRating";
+import { formatCurrency } from "@/lib/utils";
 import Image from "next/image";
 
 
 
 
-export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export default async function ProductPage({ params }: { params: Promise<{ slug: string, locale: string }> }) {
+  const { slug, locale } = await params;
   const product = await getProduct(slug);
 
   return (
@@ -23,14 +24,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <div>{product.availabilityStatus}</div>
         {product.discountPercentage ? (
           <div className="flex flex-row gap-2">
-            <div className="line-through">${product.price}</div>
+            <div className="line-through">{formatCurrency(product.price, locale)}</div>
             <div>({product.discountPercentage}%)</div>
             <div>
-              $
-              {(
+              {formatCurrency(
                 product.price -
-                (product.price * product.discountPercentage) / 100
-              ).toFixed(2)}
+                (product.price * product.discountPercentage) / 100,
+                locale
+              )}
             </div>
           </div>
         ) : (

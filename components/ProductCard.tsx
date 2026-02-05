@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Product } from "@/lib/productTypes";
+import { formatCurrency } from "@/lib/utils";
 
 interface ProductData {
   product: Product;
@@ -24,7 +25,9 @@ export default function ProductCard({ product, locale }: Readonly<ProductData>) 
       <CardHeader className="bg-gray-100">
         <CardTitle>{product.title}</CardTitle>
         <CardDescription>{product.description}</CardDescription>
-        <CardFooter className="font-bold">${product.price}</CardFooter>
+        <CardFooter className="font-bold">
+          {formatCurrency(product.price, locale)}
+        </CardFooter>
       </CardHeader>
       <CardFooter className="flex gap-4">
         <Button color="gray" className="flex-1">

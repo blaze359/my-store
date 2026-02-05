@@ -9,7 +9,6 @@ import Link from "next/link";
 import Search from "@/components/Nav/Search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping";
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import LanguageNav from "@/components/Nav/LanguageNav";
 import MyAccountNav from "@/components/Nav/MyAccountNav";
 

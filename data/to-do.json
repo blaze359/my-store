@@ -72,6 +72,11 @@
   {
     "id": 15,
     "task": "General: Add translations where needed.",
-    "status": "started"
+    "status": "done"
+  },
+  {
+    "id": 16,
+    "task": "Nav: correct language nav to stay on same page.",
+    "status": "open"
   }
 ]
