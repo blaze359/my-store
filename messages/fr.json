@@ -3,5 +3,10 @@
     "title": "Bienvenue sur ma plateforme de commerce électronique (POC)",
     "description": "Voici un site e-commerce de démonstration développé avec Next.js et TypeScript. Le style est réalisé avec Tailwind CSS et les composants d'interface utilisateur ShadCN. Le site comprend une page de liste de produits, une page de détails produit et un panier d'achat avec fonction de sauvegarde. La gestion de l'état est assurée par Mobx. N'hésitez pas à explorer le site et à consulter le code sur mon profil GitHub. Ce projet est en cours de développement et plusieurs fonctionnalités et améliorations sont prévues.",
     "toDoList": "Liste de choses à faire"
+  },
+  "Nav": {
+    "English": "English",
+    "French": "Français",
+    "Spanish": "Español"
   }
 }

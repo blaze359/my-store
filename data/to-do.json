@@ -7,7 +7,7 @@
   {
     "id": 2,
     "task": "Header: adjust hover color on navigation menu items.",
-    "status": "open"
+    "status": "done"
   },
   {
     "id": 3,
@@ -57,7 +57,7 @@
   {
     "id": 12,
     "task": "General: Add and implement currency formatting utility.",
-    "status": "open"
+    "status": "done"
   },
   {
     "id": 13,
@@ -72,11 +72,31 @@
   {
     "id": 15,
     "task": "General: Add translations where needed.",
-    "status": "done"
+    "status": "started"
   },
   {
     "id": 16,
     "task": "Nav: correct language nav to stay on same page.",
+    "status": "done"
+  },
+  {
+    "id": 17,
+    "task": "General: Move todo list off home page and setup paginated full product list on home page.",
+    "status": "open"
+  },
+  {
+    "id": 18,
+    "task": "General: Add contact page with form to submit improvements.",
+    "status": "open"
+  },
+  {
+    "id": 19,
+    "task": "General: playwright tests.",
+    "status": "open"
+  },
+  {
+    "id": 20,
+    "task": "General: Move todo into accordions with counts.",
     "status": "open"
   }
 ]

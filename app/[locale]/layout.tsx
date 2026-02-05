@@ -37,7 +37,7 @@ export default async function LocaleLayout({
         <body className="container mx-auto mb-4 px-4">
           <div className="relative w-screen left-1/2 -ml-[50vw] -mr-[50vw] right-1/2 bg-primary text-white">
             <div className="container mx-auto flex justify-end p-2">
-              <LanguageNav />
+              <LanguageNav locale={locale} />
             </div>
           </div>
           <div className="flex justify-between align-top mt-4">

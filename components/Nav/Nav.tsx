@@ -26,7 +26,7 @@ export default function Nav() {
   }, []);
 
   return (
-    <NavigationMenu viewport={false} className="z-50">
+    <NavigationMenu viewport={false} className="z-50 mt-4">
       <NavigationMenuList>
         <NavigationMenuItem className="bg-white">
           <List title="Home" categories={homeCategory} categoryData={cats} />
@@ -78,7 +78,7 @@ function List({ title, categories, categoryData }: Readonly<{ title: string; cat
       <NavigationMenuLink
         href={`/products/${cat?.slug}`}
         title={cat?.name}
-        className="hover:bg-secondary"
+        className=""
       >
         {cat?.name}
       </NavigationMenuLink>
@@ -99,7 +99,7 @@ function List({ title, categories, categoryData }: Readonly<{ title: string; cat
                 key={category}
                 href={`/products/${cat.slug}`}
                 title={cat.name}
-                className="block px-4 py-2 hover:bg-secondary hover:font-bold w-40"
+                className="block px-4 py-2 hover:font-bold w-45"
               >
                 {cat.name}
               </NavigationMenuLink>
