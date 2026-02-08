@@ -5,7 +5,6 @@ import { CartType } from "@/lib/cartTypes";
 
 export default async function MySavedCartsPage() {
   const savedCartsData = await getCartsByUser('33');
-  console.log("Saved Carts data:", savedCartsData);
   return (
     <div className="my-6">
       <h1 className="font-bold text-2xl">

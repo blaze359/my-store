@@ -36,7 +36,15 @@ export default async function LocaleLayout({
       <NextIntlClientProvider messages={messages}>
         <body className="container mx-auto mb-4 px-4">
           <div className="relative w-screen left-1/2 -ml-[50vw] -mr-[50vw] right-1/2 bg-primary text-white">
-            <div className="container mx-auto flex justify-end p-2">
+            <div className="container mx-auto flex justify-between p-2">
+              <div className="flex flex-row gap-4 items-center">
+                <Link href={`/${locale}/about`} className="mr-4 hover:text-secondary">
+                  About This Site
+                </Link>
+                <Link href={`/${locale}/about/to-do-list`} className="hover:text-secondary">
+                  To-Do List
+                </Link>
+              </div>
               <LanguageNav locale={locale} />
             </div>
           </div>

@@ -61,7 +61,7 @@
   },
   {
     "id": 13,
-    "task": "Checkout: Implement fake checkout process with form validation.",
+    "task": "Checkout: Implement POC checkout process with form validation.",
     "status": "open"
   },
   {
@@ -82,7 +82,7 @@
   {
     "id": 17,
     "task": "General: Move todo list off home page and setup paginated full product list on home page.",
-    "status": "open"
+    "status": "done"
   },
   {
     "id": 18,
@@ -97,6 +97,6 @@
   {
     "id": 20,
     "task": "General: Move todo into accordions with counts.",
-    "status": "open"
+    "status": "done"
   }
 ]

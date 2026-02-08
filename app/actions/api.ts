@@ -22,6 +22,32 @@ export const getCategories = async () => {
   }
 };
 
+export const getAllProducts = async (limit?: number, skip?: number, sort?: string, order?: 'asc' | 'desc'
+) => {
+  const params = [];
+  if (limit) params.push(`limit=${limit}`);
+  if (skip) params.push(`skip=${skip}`);
+  if (sort) params.push(`sortBy=${sort}`);
+  if (order) params.push(`order=${order}`);
+  const queryParams = params.length > 0 ? `?${params.join('&')}` : '';
+
+  try {
+    const res = await fetch(`${baseURL}products${queryParams}`, {
+      cache: 'no-store',
+    });
+    
+    if (!res.ok) {
+      throw new Error(`Failed to fetch products: ${res.statusText}`);
+    }
+    
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
+  }
+}
+
 export const getProductsByCategory = async (slug: string) => {
   try {
     const res = await fetch(`${baseURL}products/category/${slug}`, {
@@ -40,16 +66,28 @@ export const getProductsByCategory = async (slug: string) => {
   }
 };
 
-export const getProduct = async (slug: string) => {
+export const getProduct = async (
+  slug: string,
+  limit?: number,
+  skip?: number,
+  sort?: string,
+  order?: "asc" | "desc",
+) => {
+  const params = [];
+  if (limit) params.push(`limit=${limit}`);
+  if (skip) params.push(`skip=${skip}`);
+  if (sort) params.push(`sort=${sort}`);
+  if (order) params.push(`order=${order}`);
+  const queryParams = params.length > 0 ? `?${params.join("&")}` : "";
   try {
-    const res = await fetch(`${baseURL}products/${slug}`, {
-      cache: 'no-store',
+    const res = await fetch(`${baseURL}products/${slug}${queryParams}`, {
+      cache: "no-store",
     });
-    
+
     if (!res.ok) {
       throw new Error(`Failed to fetch product ${slug}: ${res.statusText}`);
     }
-    
+
     const data = await res.json();
     return data;
   } catch (error) {
@@ -58,16 +96,33 @@ export const getProduct = async (slug: string) => {
   }
 };
 
-export async function searchProducts(query: string): Promise<Product[]> {
+export async function searchProducts(
+  query: string,
+  limit?: number,
+  skip?: number,
+  sort?: string,
+  order?: "asc" | "desc",
+): Promise<Product[]> {
+  const params = [];
+  if (limit) params.push(`limit=${limit}`);
+  if (skip) params.push(`skip=${skip}`);
+  if (sort) params.push(`sort=${sort}`);
+  if (order) params.push(`order=${order}`);
+  const queryParams = params.length > 0 ? `?${params.join("&")}` : "";
   try {
-    const res = await fetch(`${baseURL}products/search?q=${encodeURIComponent(query)}`, {
-      cache: 'no-store',
-    });
-    
+    const res = await fetch(
+      `${baseURL}products/search?q=${encodeURIComponent(query)}${queryParams}`,
+      {
+        cache: "no-store",
+      },
+    );
+
     if (!res.ok) {
-      throw new Error(`Failed to search products with query "${query}": ${res.statusText}`);
+      throw new Error(
+        `Failed to search products with query "${query}": ${res.statusText}`,
+      );
     }
-    
+
     const data = await res.json();
     return data.products;
   } catch (error) {
@@ -77,7 +132,6 @@ export async function searchProducts(query: string): Promise<Product[]> {
 };
 
 export async function getCartsByUser(userId: string) {
-  console.log("Carts URL", `${baseURL}carts/user/${userId}`);
   try {
     const res = await fetch(`${baseURL}carts/user/${userId}`, {
       cache: 'no-store',
