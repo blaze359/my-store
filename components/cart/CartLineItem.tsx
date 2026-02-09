@@ -1,12 +1,15 @@
+import cartStore from "@/lib/cartStore";
 import { CartItem } from "@/lib/cartTypes";
 import Image from "next/image";
 import Link from "next/link";
+import DisplayPrice from "../DisplayPrice";
 
 interface CartItemProps {
   cartItem: CartItem;
+  locale: string;
 }
 
-export default function CartLineItem( { cartItem }: Readonly<CartItemProps> ) {
+export default function CartLineItem( { cartItem, locale }: Readonly<CartItemProps>) {
   return (
           <div className="border-b py-4 flex gap-4">
             <div>
@@ -25,11 +28,14 @@ export default function CartLineItem( { cartItem }: Readonly<CartItemProps> ) {
                 <Link href={`/product/${cartItem.id}`}>
                   <h2 className="font-semibold">{cartItem.title}</h2>
                 </Link>
-                <p>Price: ${cartItem.price}</p>
+                <DisplayPrice price={cartItem.price} discountPercentage={cartItem.discountPercentage} locale={locale} />
                 <p>Quantity: {cartItem.quantity}</p>
               </div>
               <div>
-                <p>Total: ${(cartItem.price * cartItem.quantity).toFixed(2)}</p>
+                <p>Total: ${(cartItem.discountedTotal * cartItem.quantity).toFixed(2)}</p>
+                <button className="text-sm text-red-500 hover:underline" onClick={() => cartStore.removeFromCart(cartItem.id)}>
+                  Remove
+                </button>
               </div>
             </div>
           </div>

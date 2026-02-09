@@ -16,10 +16,11 @@ import {
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 import cartStore from "@/lib/cartStore";
-import { useEffect, useState } from "react";
+
 
 interface SavedCartProps {
   cart: CartType;
+  locale: string;
 }
 
 function handleClickMakeActiveCart(cart: CartType) {
@@ -27,7 +28,7 @@ function handleClickMakeActiveCart(cart: CartType) {
 }
 
 
-export default function SavedCart({ cart }: Readonly<SavedCartProps>) {
+export default function SavedCart({ cart, locale }: Readonly<SavedCartProps>) {
 
   return (
     <div className="flex flex-row gap-2 w-full items-center">
@@ -47,7 +48,7 @@ export default function SavedCart({ cart }: Readonly<SavedCartProps>) {
         </AccordionTrigger>
         <AccordionContent>
           {cart.products.map((item: CartItem) => (
-            <CartLineItem key={item.id} cartItem={item} />
+            <CartLineItem key={item.id} cartItem={item} locale={locale} />
           ))}
         </AccordionContent>
       </AccordionItem>

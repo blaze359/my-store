@@ -7,6 +7,7 @@ import { formatCurrency } from "@/lib/utils";
 import { StarRating } from "./ui/StarRating";
 import StockStatus from "./StockStatus";
 import DisplayPrice from "./DisplayPrice";
+import AddToCartButton from "./AddToCartButton";
 
 interface ProductData {
   product: Product;
@@ -14,7 +15,6 @@ interface ProductData {
 }
 
 export default function ProductCard({ product, locale }: Readonly<ProductData>) {
-  console.log(product);
   return (
     <Card key={product.id} className="w-96">
       <div className="relative h-96">
@@ -36,9 +36,7 @@ export default function ProductCard({ product, locale }: Readonly<ProductData>) 
         </CardFooter>
       </CardHeader>
       <CardFooter className="flex gap-4">
-        <Button color="gray" className="flex-1">
-          Add to Cart
-        </Button>
+        <AddToCartButton product={product} className="flex-1"/>
         <Link href={`/${locale}/product/${product?.id}`}>
           <Button className="flex-1 bg-secondary hover:bg-secondary-foreground text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100">
             More Info

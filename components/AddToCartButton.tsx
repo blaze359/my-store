@@ -11,8 +11,9 @@ type AddToCartButtonProps = {
 
 export default function AddToCartButton({ product, className }: Readonly<AddToCartButtonProps>) {
   function handleClick() {
+    console.log("Adding to cart:", product);
     if (!product) return;
-
+    console.log("clicked add to cart button for product:", product);
     // Omit quantity, total, discountedTotal — the store handles them
     const cartData = {
       id: product.id,
@@ -23,6 +24,7 @@ export default function AddToCartButton({ product, className }: Readonly<AddToCa
     };
 
     cartStore.addToCart(cartData, 1);
+    console.log("Current cart state:", cartStore.cart);
   }
 
   return (

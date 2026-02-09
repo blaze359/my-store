@@ -9,10 +9,7 @@ export default async function ProductList({ params }: { params: Promise<{ slug: 
   const categories = await getCategories();
   const products = await getProductsByCategory(slug);
   const locale = await getLocale();
-  console.log("Category slug:", slug);
-  console.log("Categories data:", categories);
   const category = categories.find((cat: Category) => cat.slug === slug);
-  console.log("Category data:", category);
   
   return (
     <main className="my-8">
