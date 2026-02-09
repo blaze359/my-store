@@ -3,38 +3,14 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Product } from "@/lib/productTypes";
-import { cn, formatCurrency } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 import { StarRating } from "./ui/StarRating";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck, faCircleXmark } from "@fortawesome/free-regular-svg-icons";
-import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import StockStatus from "./StockStatus";
+import DisplayPrice from "./DisplayPrice";
 
 interface ProductData {
   product: Product;
   locale: string;
-}
-
-function StockStatus({ status }: { status: string }) {
-  let colorClass = "text-gray-500";
-  let icon = faCircleXmark;
-  
-  if (status === "In Stock") {
-    colorClass = "text-green-500";
-    icon = faCircleCheck;
-  } else if (status === "Low Stock") {
-    colorClass = "text-yellow-500";
-    icon = faCircleExclamation;
-  } else if (status === "Out of Stock") {
-    colorClass = "text-red-500";
-    icon = faCircleXmark;
-  }
-  
-  return (
-    <div className={cn(colorClass, "flex flex-row items-center gap-1")}>
-    <FontAwesomeIcon icon={icon} className="h-4 w-4"/>
-    {status}
-    </div>
-  );
 }
 
 export default function ProductCard({ product, locale }: Readonly<ProductData>) {
@@ -56,20 +32,7 @@ export default function ProductCard({ product, locale }: Readonly<ProductData>) 
         <StarRating value={product.rating} readOnly />
         <CardFooter className="font-bold flex flex-row justify-between items-baseline">
           <StockStatus status={product.availabilityStatus} />
-          {product.discountPercentage > 0 ? (
-            <div className="flex flex-col">
-              <div className="line-through text-red-500">{formatCurrency(product.price, locale)}</div>
-              <div>
-                {formatCurrency(
-                  product.price -
-                  (product.price * product.discountPercentage) / 100,
-                  locale
-                )}
-              </div>
-            </div>
-          ) : ( 
-          <div>{formatCurrency(product.price, locale)}</div>
-          )}
+          <DisplayPrice price={product.price} discountPercentage={product.discountPercentage} locale={locale} displayPercentage={false} />
         </CardFooter>
       </CardHeader>
       <CardFooter className="flex gap-4">

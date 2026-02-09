@@ -7,15 +7,15 @@ type ProductImageCarouselProps = {
 
 export default function ProductImageCarousel({ images }: Readonly<ProductImageCarouselProps>) {
   return (
-    <Carousel className="w-100 mt-4">
+    <Carousel className="w-full mt-4">
       <CarouselContent>
         {images.map((image: string, index: number) => (
           <CarouselItem key={index}>
             <Image
               src={image}
               alt={`image ${index + 1}`}
-              width={300}
-              height={300}
+              width={500}
+              height={500}
             />
           </CarouselItem>
         ))}

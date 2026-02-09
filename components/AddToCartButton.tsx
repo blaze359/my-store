@@ -4,8 +4,12 @@ import cartStore from "@/lib/cartStore";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/lib/productTypes";
 
+type AddToCartButtonProps = {
+  product: Product;
+  className?: string;
+};
 
-export default function AddToCartButton({ product }: Readonly<{ product: Product }>) {
+export default function AddToCartButton({ product, className }: Readonly<AddToCartButtonProps>) {
   function handleClick() {
     if (!product) return;
 
@@ -22,7 +26,7 @@ export default function AddToCartButton({ product }: Readonly<{ product: Product
   }
 
   return (
-    <Button className="my-4" onClick={() => handleClick()}>
+    <Button className={`${className ?? ""}`} onClick={() => handleClick()}>
       Add to Cart
     </Button>
   );

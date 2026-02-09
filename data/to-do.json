@@ -32,7 +32,7 @@
   {
     "id": 7,
     "task": "PDP: Improve styling of PDP page.",
-    "status": "open"
+    "status": "done"
   },
   {
     "id": 8,
@@ -98,5 +98,15 @@
     "id": 20,
     "task": "General: Move todo into accordions with counts.",
     "status": "done"
+  },
+  {
+    "id": 21,
+    "task": "General: Assess site for mobile responsiveness and make adjustments as needed.",
+    "status": "open"
+  },
+  {
+    "id": 22,
+    "task": "General: Assess site for accessibility and make adjustments as needed.",
+    "status": "open"
   }
 ]
