@@ -1,7 +1,7 @@
-import { searchProducts } from "@/app/actions/api";
-import ProductCard from "@/components/ProductCard";
-import { Product } from "@/lib/productTypes";
-import { getLocale } from "next-intl/server";
+import { searchProducts } from '@/app/actions/api';
+import ProductCard from '@/components/ProductCard';
+import { Product } from '@/lib/productTypes';
+import { getLocale } from 'next-intl/server';
 
 export default async function SearchPage({
   searchParams,
@@ -9,7 +9,7 @@ export default async function SearchPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  const query = resolvedSearchParams.q ?? "";
+  const query = resolvedSearchParams.q ?? '';
 
   const searchResults: Product[] = await searchProducts(query as string);
   const locale = await getLocale();

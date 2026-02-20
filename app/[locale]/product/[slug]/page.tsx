@@ -1,14 +1,15 @@
-import { getProduct } from "@/app/actions/api";
-import AddToCartButton from "@/components/AddToCartButton";
-import DisplayPrice from "@/components/DisplayPrice";
-import ProductImageCarousel from "@/components/pdp/ProductImageCarousel";
-import StockStatus from "@/components/StockStatus";
-import { StarRating } from "@/components/ui/StarRating";
+import { getProduct } from '@/app/actions/api';
+import AddToCartButton from '@/components/AddToCartButton';
+import DisplayPrice from '@/components/DisplayPrice';
+import ProductImageCarousel from '@/components/pdp/ProductImageCarousel';
+import StockStatus from '@/components/StockStatus';
+import { StarRating } from '@/components/ui/StarRating';
 
-
-
-
-export default async function ProductPage({ params }: { params: Promise<{ slug: string, locale: string }> }) {
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ slug: string; locale: string }>;
+}) {
   const { slug, locale } = await params;
   const product = await getProduct(slug);
 

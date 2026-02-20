@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --check .",
+    "format:fix": "prettier --write .",
     "deploy": "npm run lint && npm run format && next build && next start"
   },
   "dependencies": {

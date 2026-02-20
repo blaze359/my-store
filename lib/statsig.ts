@@ -1,5 +1,3 @@
-
-
 import Statsig from 'statsig-node';
 let statsigInitialized = false;
 
@@ -8,13 +6,18 @@ function getStableID() {
   if (typeof globalThis !== 'undefined' && globalThis.localStorage?.getItem) {
     let stableID = globalThis.localStorage.getItem('statsigStableID');
     if (!stableID) {
-      stableID = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now();
+      stableID =
+        typeof crypto !== 'undefined' && crypto.randomUUID
+          ? crypto.randomUUID()
+          : Math.random().toString(36).substring(2) + Date.now();
       globalThis.localStorage.setItem('statsigStableID', stableID);
     }
     return stableID;
   }
   // Node.js fallback
-  return (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now();
+  return typeof crypto !== 'undefined' && crypto.randomUUID
+    ? crypto.randomUUID()
+    : Math.random().toString(36).substring(2) + Date.now();
 }
 
 export async function getStatsigInstance() {
@@ -24,7 +27,6 @@ export async function getStatsigInstance() {
   }
   return Statsig;
 }
-
 
 export async function getDynamicConfig(key: string, user?: { locale?: string }) {
   const statsig = await getStatsigInstance();

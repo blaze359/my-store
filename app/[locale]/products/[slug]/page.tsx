@@ -1,8 +1,7 @@
-import { getCategories, getProductsByCategory } from "@/app/actions/api";
-import ProductCard from "@/components/ProductCard";
-import { Category, Product } from "@/lib/productTypes";
-import { getLocale } from "next-intl/server";
-
+import { getCategories, getProductsByCategory } from '@/app/actions/api';
+import ProductCard from '@/components/ProductCard';
+import { Category, Product } from '@/lib/productTypes';
+import { getLocale } from 'next-intl/server';
 
 export default async function ProductList({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -10,7 +9,7 @@ export default async function ProductList({ params }: { params: Promise<{ slug: 
   const products = await getProductsByCategory(slug);
   const locale = await getLocale();
   const category = categories.find((cat: Category) => cat.slug === slug);
-  
+
   return (
     <main className="my-8">
       <h1 className="text-2xl font-bold">{category?.name}</h1>
@@ -21,5 +20,4 @@ export default async function ProductList({ params }: { params: Promise<{ slug: 
       </div>
     </main>
   );
-
 }

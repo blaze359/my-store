@@ -1,5 +1,12 @@
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, CarouselProgress } from "@/components/ui/carousel";
-import Image from "next/image";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselProgress,
+} from '@/components/ui/carousel';
+import Image from 'next/image';
 
 type ProductImageCarouselProps = {
   images: string[];
@@ -11,12 +18,7 @@ export default function ProductImageCarousel({ images }: Readonly<ProductImageCa
       <CarouselContent>
         {images.map((image: string, index: number) => (
           <CarouselItem key={index}>
-            <Image
-              src={image}
-              alt={`image ${index + 1}`}
-              width={500}
-              height={500}
-            />
+            <Image src={image} alt={`image ${index + 1}`} width={500} height={500} />
           </CarouselItem>
         ))}
       </CarouselContent>

@@ -49,4 +49,3 @@ export interface ProductMeta {
   barcode: string;
   qrCode: string; // URL string
 }
-

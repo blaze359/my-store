@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Star } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Star } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface StarRatingProps {
   value?: number;
@@ -18,7 +18,7 @@ export function StarRating({
   max = 5,
   readOnly = false,
   onChange,
-  colorClassName = "text-yellow-400",
+  colorClassName = 'text-yellow-400',
   size = 20,
   showValue = true,
 }: StarRatingProps) {
@@ -26,7 +26,7 @@ export function StarRating({
 
   return (
     <div
-      className={cn("flex items-center gap-2", readOnly && "cursor-default")}
+      className={cn('flex items-center gap-2', readOnly && 'cursor-default')}
       role="radiogroup"
       aria-readonly={readOnly}
     >
@@ -41,22 +41,18 @@ export function StarRating({
               type="button"
               disabled={readOnly}
               onClick={() => onChange?.(ratingValue)}
-              aria-label={`Rate ${ratingValue} star${ratingValue > 1 ? "s" : ""}`}
-              className={cn(
-                "p-0",
-                !readOnly && "cursor-pointer",
-                readOnly && "cursor-default",
-              )}
+              aria-label={`Rate ${ratingValue} star${ratingValue > 1 ? 's' : ''}`}
+              className={cn('p-0', !readOnly && 'cursor-pointer', readOnly && 'cursor-default')}
             >
               <Star
                 size={size}
                 className={cn(
-                  "transition-colors",
-                  filled ? colorClassName : "text-muted-foreground",
+                  'transition-colors',
+                  filled ? colorClassName : 'text-muted-foreground',
                   !readOnly && !filled && `hover:${colorClassName}`,
-                  readOnly && "pointer-events-none",
+                  readOnly && 'pointer-events-none'
                 )}
-                fill={filled ? "currentColor" : "none"}
+                fill={filled ? 'currentColor' : 'none'}
               />
             </button>
           );

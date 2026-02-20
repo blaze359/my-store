@@ -1,9 +1,9 @@
 'use client';
 
-import { CartItem, CartType } from "@/lib/cartTypes";
-import { AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import CartLineItem from "./CartLineItem";
-import { Button } from "../ui/button";
+import { CartItem, CartType } from '@/lib/cartTypes';
+import { AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
+import CartLineItem from './CartLineItem';
+import { Button } from '../ui/button';
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -14,9 +14,8 @@ import {
   AlertDialogFooter,
   AlertDialogCancel,
   AlertDialogAction,
-} from "@/components/ui/alert-dialog";
-import cartStore from "@/lib/cartStore";
-
+} from '@/components/ui/alert-dialog';
+import cartStore from '@/lib/cartStore';
 
 interface SavedCartProps {
   cart: CartType;
@@ -27,9 +26,7 @@ function handleClickMakeActiveCart(cart: CartType) {
   cartStore.cart = cart;
 }
 
-
 export default function SavedCart({ cart, locale }: Readonly<SavedCartProps>) {
-
   return (
     <div className="flex flex-row gap-2 w-full items-center">
       <AccordionItem key={cart.id} value={cart.id.toString()} className="grow">
@@ -60,8 +57,8 @@ export default function SavedCart({ cart, locale }: Readonly<SavedCartProps>) {
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will abandon your current active cart and replace it with the
-              saved cart (ID: {cart.id}).
+              This will abandon your current active cart and replace it with the saved cart (ID:{' '}
+              {cart.id}).
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

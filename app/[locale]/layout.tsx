@@ -1,17 +1,17 @@
-import { NextIntlClientProvider } from "next-intl";
+import { NextIntlClientProvider } from 'next-intl';
 
 import { getDynamicMessages } from '@/i18n/dynamicMessages';
-import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
-import "../globals.css";
-import Nav from "@/components/Nav/Nav";
-import Image from "next/image";
-import Link from "next/link";
-import Search from "@/components/Nav/Search";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping";
-import LanguageNav from "@/components/Nav/LanguageNav";
-import MyAccountNav from "@/components/Nav/MyAccountNav";
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
+import '../globals.css';
+import Nav from '@/components/Nav/Nav';
+import Image from 'next/image';
+import Link from 'next/link';
+import Search from '@/components/Nav/Search';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons/faCartShopping';
+import LanguageNav from '@/components/Nav/LanguageNav';
+import MyAccountNav from '@/components/Nav/MyAccountNav';
 
 type Locale = (typeof routing.locales)[number];
 
@@ -51,12 +51,7 @@ export default async function LocaleLayout({
           </div>
           <div className="flex justify-between align-top mt-4">
             <Link href={`/${locale}`}>
-              <Image
-                src="/logo-image.jpg"
-                alt="Logo"
-                width={150}
-                height={150}
-              />
+              <Image src="/logo-image.jpg" alt="Logo" width={150} height={150} />
             </Link>
             <div className="flex flex-row gap-4 items-center h-10">
               <Search />
@@ -71,10 +66,7 @@ export default async function LocaleLayout({
           {children}
           <footer className="mt-12 border-t-2 border-primary py-10 text-center text-sm text-muted-foreground flex flex-row justify-center gap-2">
             <p>Check out my profile site</p>
-            <a
-              href="https://blaze359.github.io/"
-              className="underline hover:text-primary"
-            >
+            <a href="https://blaze359.github.io/" className="underline hover:text-primary">
               https://blaze359.github.io/
             </a>
           </footer>

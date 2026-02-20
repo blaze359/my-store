@@ -1,21 +1,21 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export function formatCurrency(amount: number, locale: string = 'en'): string {
   let fullLocale = 'en-US';
   let currency = 'USD';
   if (locale === 'es') {
-    fullLocale = "es-MX";
+    fullLocale = 'es-MX';
     currency = 'MXN';
   } else if (locale === 'fr') {
-    fullLocale = "fr-CA";
+    fullLocale = 'fr-CA';
     currency = 'CAD';
   }
-  
+
   return new Intl.NumberFormat(fullLocale, {
     style: 'currency',
     currency: currency,

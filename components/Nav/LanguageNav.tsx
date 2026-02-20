@@ -1,21 +1,25 @@
-
-
 'use client';
 
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
-import { useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
-
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from '@/components/ui/navigation-menu';
+import { useTranslations } from 'next-intl';
+import { usePathname } from 'next/navigation';
 
 type LanguageNavProps = {
   locale: string;
 };
 
 export default function LanguageNav({ locale }: Readonly<LanguageNavProps>) {
-  const t = useTranslations("Nav");
+  const t = useTranslations('Nav');
   const pathname = usePathname();
   // Remove the locale prefix from the pathname
-  const pathnameWithoutLocale = pathname.replace(/^\/(en|es|fr)/, "") || "/";
+  const pathnameWithoutLocale = pathname.replace(/^\/(en|es|fr)/, '') || '/';
 
   let languageLabel = t('English');
   if (locale === 'es') {
@@ -28,9 +32,7 @@ export default function LanguageNav({ locale }: Readonly<LanguageNavProps>) {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="bg-primary">
-            {languageLabel}
-          </NavigationMenuTrigger>
+          <NavigationMenuTrigger className="bg-primary">{languageLabel}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <NavigationMenuLink
               href={`/en${pathnameWithoutLocale}`}
