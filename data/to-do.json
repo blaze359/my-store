@@ -52,7 +52,7 @@
   {
     "id": 11,
     "task": "Cart: Improve styling and add section on right for General cart details.",
-    "status": "open"
+    "status": "done"
   },
   {
     "id": 12,
@@ -107,6 +107,16 @@
   {
     "id": 22,
     "task": "General: Assess site for accessibility and make adjustments as needed.",
+    "status": "open"
+  },
+  {
+    "id": 23,
+    "task": "General: Add smooth scrolling.",
+    "status": "open"
+  },
+  {
+    "id": 24,
+    "task": "General: Add this list to statsig.",
     "status": "open"
   }
 ]

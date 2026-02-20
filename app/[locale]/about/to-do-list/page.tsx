@@ -5,9 +5,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faCircle as faCircleRegular } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import toDoList from "@/data/to-do.json";
 import { getTranslations } from "next-intl/server";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { getDynamicConfig } from "@/lib/statsig";
 
 function renderStatusIcon(status: string) {
   switch (status) {
@@ -37,12 +37,19 @@ function renderStatusIcon(status: string) {
   }
 }
 
+type Task = {
+  id: number;
+  task: string;
+  status: string;
+};
+
 export default async function ToDoListPage() {
   const t = await getTranslations("About");
+  const toDoList = await getDynamicConfig("to_do") as { list: Task[] };
 
-  const openTasks = toDoList.filter((item) => item.status === "open");
-  const startedTasks = toDoList.filter((item) => item.status === "started");
-  const doneTasks = toDoList.filter((item) => item.status === "done");
+  const openTasks = toDoList?.list.filter((item) => item.status === "open");
+  const startedTasks = toDoList?.list.filter((item) => item.status === "started");
+  const doneTasks = toDoList?.list.filter((item) => item.status === "done");
 
   return (
     <div className="my-6">

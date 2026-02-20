@@ -1,5 +1,6 @@
 import { getRequestConfig } from "next-intl/server";
 import { routing } from "./routing";
+import { getDynamicMessages } from "./dynamicMessages";
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // This typically corresponds to the `[locale]` segment
@@ -9,9 +10,11 @@ export default getRequestConfig(async ({ requestLocale }) => {
   if (!locale || !(routing.locales as readonly string[]).includes(locale)) {
     locale = routing.defaultLocale;
   }
-  
+
+  const messages = await getDynamicMessages(locale);
+
   return {
     locale,
-    messages: (await import(`../messages/${locale}.json`)).default,
+    messages,
   };
 });

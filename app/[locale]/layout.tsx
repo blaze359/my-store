@@ -1,5 +1,6 @@
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+
+import { getDynamicMessages } from '@/i18n/dynamicMessages';
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
@@ -29,7 +30,7 @@ export default async function LocaleLayout({
   }
 
   // Providing all messages to the client side is the easiest way to get started
-  const messages = await getMessages();
+  const messages = await getDynamicMessages(locale);
 
   return (
     <html lang={locale}>
