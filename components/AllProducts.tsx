@@ -12,18 +12,34 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 type sortOptions = 'none' | 'title' | 'price';
 type orderOptions = 'asc' | 'desc';
 
 export default function AllProducts() {
-  const [page, setPage] = useState(1);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
   const [totalPages, setTotalPages] = useState(1);
   const [products, setProducts] = useState<Product[]>([]);
-  const [sort, setSort] = useState<sortOptions>('none');
-  const [order, setOrder] = useState<orderOptions>('asc');
+  const [sort, setSort] = useState<sortOptions>((searchParams.get('sort') as sortOptions) || 'none');
+  const [order, setOrder] = useState<orderOptions>((searchParams.get('order') as orderOptions) || 'asc');
 
   const productsPerPage = 9;
+
+  // Update URL params whenever page, sort, or order changes
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (page !== 1) params.set('page', String(page));
+    if (sort !== 'none') params.set('sort', sort);
+    if (order !== 'asc') params.set('order', order);
+    
+    const queryString = params.toString();
+    const newUrl = queryString ? `?${queryString}` : window.location.pathname;
+    router.replace(newUrl, { scroll: false });
+  }, [page, sort, order, router]);
 
   useEffect(() => {
     const sortParam = sort === 'none' ? '' : sort;
@@ -39,7 +55,7 @@ export default function AllProducts() {
         <div className="flex flex-row gap-2 items-center">
           <div>Sort by:</div>
           <div className="flex flex-row gap-2 items-center">
-            <Select onValueChange={(value) => setSort(value as sortOptions)} defaultValue={sort}>
+            <Select onValueChange={(value) => setSort(value as sortOptions)} value={sort}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -51,7 +67,7 @@ export default function AllProducts() {
                 ))}
               </SelectContent>
             </Select>
-            <Select onValueChange={(value) => setOrder(value as orderOptions)} defaultValue={order}>
+            <Select onValueChange={(value) => setOrder(value as orderOptions)} value={order}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -73,7 +89,7 @@ export default function AllProducts() {
             Next
           </Button>
           <div>
-            <Select onValueChange={(value) => setPage(Number(value))} defaultValue={String(page)}>
+            <Select onValueChange={(value) => setPage(Number(value))} value={String(page)}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>

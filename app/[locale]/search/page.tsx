@@ -1,7 +1,8 @@
-import { searchProducts } from '@/app/actions/api';
+import { getCategories, searchProducts } from '@/app/actions/api';
 import ProductCard from '@/components/ProductCard';
-import { Product } from '@/lib/productTypes';
+import { Category, Product } from '@/lib/productTypes';
 import { getLocale } from 'next-intl/server';
+import { redirect } from 'next/navigation';
 
 export default async function SearchPage({
   searchParams,
@@ -9,7 +10,17 @@ export default async function SearchPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  const query = resolvedSearchParams.q ?? '';
+  const queryParam = resolvedSearchParams.q ?? '';
+  const query = Array.isArray(queryParam) ? queryParam[0] : queryParam;
+
+  const cats = await getCategories();
+  const selectedCategory = cats.find((cat: Category) => 
+    cat.name.toLocaleUpperCase().replace(/[,']/g, '') === query.toLocaleUpperCase().replace(/[,']/g, '')
+  );
+
+  if (selectedCategory) {
+    redirect(`/products/${selectedCategory.slug}`);
+  }
 
   const searchResults: Product[] = await searchProducts(query as string);
   const locale = await getLocale();
