@@ -3,16 +3,24 @@ import CartLineItem from '@/components/cart/CartLineItem';
 import cartStore from '@/lib/cartStore';
 import { observer } from 'mobx-react-lite';
 import { useLocale } from 'next-intl';
+import { useEffect, useState } from 'react';
 
 const CartPage = observer(function CartPage() {
   const locale = useLocale();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) {
+    return null;
+  }
   return (
     <div className="my-6">
       <h1 className="font-bold text-2xl">Cart ({cartStore.cart.totalProducts})</h1>
       <button className="text-sm text-primary hover:underline" onClick={cartStore.clearCart}>
         Clear Cart
       </button>
-      <div className="flex flex-row gap-10">
+      <div className="flex flex-col md:flex-row gap-10">
         <div className="flex-1">
           {cartStore.cart.totalProducts > 0 ? (
             <div>
@@ -26,7 +34,7 @@ const CartPage = observer(function CartPage() {
             <p className="mt-4">Your cart is currently empty.</p>
           )}
         </div>
-        <div className="w-96 p-4 border rounded-2xl bg-primary/25 h-fit flex flex-col gap-4">
+        <div className="w-auto md:w-96 p-4 border rounded-2xl bg-primary/25 h-fit flex flex-col gap-4">
           <h3 className="text-lg font-bold">Summary</h3>
           <hr className="border-secondary" />
           <div className="font-bold flex justify-between">

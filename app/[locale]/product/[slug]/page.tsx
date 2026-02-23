@@ -14,7 +14,7 @@ export default async function ProductPage({
   const product = await getProduct(slug);
 
   return (
-    <div className="flex flex-row my-10 gap-10 mx-6">
+    <div className="flex flex-col md:flex-row my-10 gap-10 mx-6">
       <ProductImageCarousel images={product.images} />
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-4">
@@ -28,7 +28,7 @@ export default async function ProductPage({
         <div className="">
           <div>Description: {product.description}</div>
         </div>
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-8 md:items-center justify-between">
           <div className="flex-1">
             <StockStatus status={product.availabilityStatus} />
             <DisplayPrice

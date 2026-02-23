@@ -33,7 +33,7 @@ export default function Nav() {
   }, []);
 
   return (
-    <NavigationMenu viewport={false} className="z-50 mt-4">
+    <NavigationMenu viewport={false} className="hidden md:block z-50 mt-4">
       <NavigationMenuList>
         <NavigationMenuItem className="bg-white">
           <List title="Home" categories={homeCategory} categoryData={cats} />

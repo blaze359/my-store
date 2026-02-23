@@ -35,7 +35,7 @@ export default function AllProducts() {
 
   return (
     <>
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex flex-col md:flex-row justify-between md:items-center mt-4 gap-4">
         <div className="flex flex-row gap-2 items-center">
           <div>Sort by:</div>
           <div className="flex flex-row gap-2 items-center">
@@ -86,7 +86,7 @@ export default function AllProducts() {
               </SelectContent>
             </Select>
           </div>
-          <div className="mx-4">
+          <div className="hidden md:block mx-4">
             <span>
               Page {page} of {totalPages}
             </span>

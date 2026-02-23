@@ -23,7 +23,7 @@ export default function CartLineItem({ cartItem, locale }: Readonly<CartItemProp
           />
         </Link>
       </div>
-      <div className="flex justify-between w-full">
+      <div className="flex justify-between w-full flex-col md:flex-row">
         <div>
           <Link href={`/product/${cartItem.id}`}>
             <h2 className="font-semibold">{cartItem.title}</h2>

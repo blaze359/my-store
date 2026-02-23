@@ -13,7 +13,7 @@ type MyAccountNavProps = {
 
 export default function MyAccountNav({ locale }: Readonly<MyAccountNavProps>) {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="hidden md:block">
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>My Account</NavigationMenuTrigger>

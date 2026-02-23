@@ -28,7 +28,7 @@ export default function AddToCartButton({ product, className }: Readonly<AddToCa
   }
 
   return (
-    <Button className={`${className ?? ''}`} onClick={() => handleClick()}>
+    <Button className={`${className ?? ''} max-w-60`} onClick={() => handleClick()}>
       Add to Cart
     </Button>
   );
