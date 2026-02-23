@@ -22,7 +22,11 @@ export default function ProductCard({ product, locale }: Readonly<ProductData>) 
   };
 
   return (
-    <Card key={product.id} className="w-96 cursor-pointer transition-all duration-300 shadow-md hover:-translate-y-2 hover:shadow-2xl" onClick={handleCardClick}>
+    <Card
+      key={product.id}
+      className="w-96 cursor-pointer transition-all duration-300 shadow-md hover:-translate-y-2 hover:shadow-2xl"
+      onClick={handleCardClick}
+    >
       <div className="relative h-96">
         <Image
           src={product.thumbnail}
@@ -46,7 +50,10 @@ export default function ProductCard({ product, locale }: Readonly<ProductData>) 
           />
         </CardFooter>
       </CardHeader>
-      <CardFooter className="flex gap-4 items-center justify-center" onClick={(e) => e.stopPropagation()}>
+      <CardFooter
+        className="flex gap-4 items-center justify-center"
+        onClick={(e) => e.stopPropagation()}
+      >
         <AddToCartButton product={product} className="flex-1" />
       </CardFooter>
     </Card>

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
@@ -104,8 +104,12 @@ function MobileList({
   if (categories.length === 1) {
     const cat = categoryData?.find((cat) => cat.slug === categories[0]);
     return (
-      <SheetClose asChild className=''>
-        <Link href={`${cat?.slug.includes('about') ? '' : '/products'}/${cat?.slug}`} title={cat?.name} className="">
+      <SheetClose asChild className="">
+        <Link
+          href={`${cat?.slug.includes('about') ? '' : '/products'}/${cat?.slug}`}
+          title={cat?.name}
+          className=""
+        >
           {cat?.name}
         </Link>
       </SheetClose>

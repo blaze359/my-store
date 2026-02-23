@@ -24,8 +24,12 @@ export default function AllProducts() {
   const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
   const [totalPages, setTotalPages] = useState(1);
   const [products, setProducts] = useState<Product[]>([]);
-  const [sort, setSort] = useState<sortOptions>((searchParams.get('sort') as sortOptions) || 'none');
-  const [order, setOrder] = useState<orderOptions>((searchParams.get('order') as orderOptions) || 'asc');
+  const [sort, setSort] = useState<sortOptions>(
+    (searchParams.get('sort') as sortOptions) || 'none'
+  );
+  const [order, setOrder] = useState<orderOptions>(
+    (searchParams.get('order') as orderOptions) || 'asc'
+  );
 
   const productsPerPage = 9;
 
@@ -35,7 +39,7 @@ export default function AllProducts() {
     if (page !== 1) params.set('page', String(page));
     if (sort !== 'none') params.set('sort', sort);
     if (order !== 'asc') params.set('order', order);
-    
+
     const queryString = params.toString();
     const newUrl = queryString ? `?${queryString}` : window.location.pathname;
     router.replace(newUrl, { scroll: false });

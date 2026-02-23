@@ -14,8 +14,10 @@ export default async function SearchPage({
   const query = Array.isArray(queryParam) ? queryParam[0] : queryParam;
 
   const cats = await getCategories();
-  const selectedCategory = cats.find((cat: Category) => 
-    cat.name.toLocaleUpperCase().replace(/[,']/g, '') === query.toLocaleUpperCase().replace(/[,']/g, '')
+  const selectedCategory = cats.find(
+    (cat: Category) =>
+      cat.name.toLocaleUpperCase().replace(/[,']/g, '') ===
+      query.toLocaleUpperCase().replace(/[,']/g, '')
   );
 
   if (selectedCategory) {

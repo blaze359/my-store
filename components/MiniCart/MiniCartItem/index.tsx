@@ -1,7 +1,7 @@
-import Image from "next/image";
-import { CartItem } from "@/lib/cartTypes";
-import Link from "next/link";
-import { SheetClose } from "@/components/ui/sheet";
+import Image from 'next/image';
+import { CartItem } from '@/lib/cartTypes';
+import Link from 'next/link';
+import { SheetClose } from '@/components/ui/sheet';
 
 interface CartItemData {
   cartItem: CartItem;
@@ -10,17 +10,16 @@ interface CartItemData {
 }
 
 const MiniCartItem = ({ cartItem, closeOnLinkClick = false, onLinkClick }: CartItemData) => {
-
   return (
     <li className="flex flex-row gap-2 m-2">
       <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200 relative">
-        <Image 
-          src={cartItem?.thumbnail ? cartItem?.thumbnail : ""} 
-          alt={cartItem?.title ? cartItem?.title : ""} 
-          className="size-full object-cover" 
+        <Image
+          src={cartItem?.thumbnail ? cartItem?.thumbnail : ''}
+          alt={cartItem?.title ? cartItem?.title : ''}
+          className="size-full object-cover"
           fill
-          style={{objectFit:'contain'}}
-          />
+          style={{ objectFit: 'contain' }}
+        />
       </div>
       <div className="ml-4 flex flex-1 flex-col">
         <div>
@@ -28,11 +27,16 @@ const MiniCartItem = ({ cartItem, closeOnLinkClick = false, onLinkClick }: CartI
             <h3>
               {closeOnLinkClick ? (
                 <SheetClose asChild>
-                  <Link href={`/product/${cartItem?.id}`} className="font-medium text-indigo-600 hover:text-indigo-500 text-left">{cartItem?.title}</Link>
+                  <Link
+                    href={`/product/${cartItem?.id}`}
+                    className="font-medium text-indigo-600 hover:text-indigo-500 text-left"
+                  >
+                    {cartItem?.title}
+                  </Link>
                 </SheetClose>
               ) : (
-                <Link 
-                  href={`/product/${cartItem?.id}`} 
+                <Link
+                  href={`/product/${cartItem?.id}`}
                   className="font-medium text-indigo-600 hover:text-indigo-500 text-left"
                   onClick={onLinkClick}
                 >
@@ -47,14 +51,16 @@ const MiniCartItem = ({ cartItem, closeOnLinkClick = false, onLinkClick }: CartI
           <p className="text-gray-500">Qty {cartItem?.quantity}</p>
 
           <div className="flex">
-            <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
+            <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500">
+              Remove
+            </button>
           </div>
         </div>
       </div>
     </li>
-  )
-}
+  );
+};
 
-MiniCartItem.displayName = 'MiniCartItem'
+MiniCartItem.displayName = 'MiniCartItem';
 
-export default MiniCartItem
+export default MiniCartItem;

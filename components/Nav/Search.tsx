@@ -5,7 +5,7 @@ export default function Search() {
   const locale = useLocale();
 
   return (
-    <form method="get" action={`/${locale}/search`} className='flex md:block'>
+    <form method="get" action={`/${locale}/search`} className="flex md:block">
       <input
         type="text"
         name="q"
