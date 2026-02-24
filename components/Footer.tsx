@@ -1,17 +1,24 @@
 'use client';
 
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "./ui/sheet";
-import { Button } from "./ui/button";
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+} from './ui/sheet';
+import { Button } from './ui/button';
 
-const COOKIE_NAME = "translations-confirmed";
+const COOKIE_NAME = 'translations-confirmed';
 const COOKIE_EXPIRY_DAYS = 365;
 
 // Helper functions for cookie management
 function getCookie(name: string): string | null {
   if (typeof document === 'undefined') return null;
-  
+
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
@@ -20,9 +27,9 @@ function getCookie(name: string): string | null {
 
 function setCookie(name: string, value: string, days: number): void {
   if (typeof document === 'undefined') return;
-  
+
   const date = new Date();
-  date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
   const expires = `expires=${date.toUTCString()}`;
   document.cookie = `${name}=${value};${expires};path=/`;
 }
@@ -36,7 +43,7 @@ export default function Footer() {
   });
 
   const handleConfirm = () => {
-    setCookie(COOKIE_NAME, "true", COOKIE_EXPIRY_DAYS);
+    setCookie(COOKIE_NAME, 'true', COOKIE_EXPIRY_DAYS);
     setIsSheetOpen(false);
   };
 

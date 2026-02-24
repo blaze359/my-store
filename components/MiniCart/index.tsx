@@ -21,7 +21,7 @@ export default observer(() => {
     setMounted(true);
   }, []);
   return (
-    <div className="z-[90] hidden md:block">
+    <div className="hidden md:block">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger
           onMouseEnter={() => setOpen(true)}

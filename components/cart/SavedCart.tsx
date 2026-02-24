@@ -35,13 +35,23 @@ export default function SavedCart({ cart, locale }: Readonly<SavedCartProps>) {
         <AccordionTrigger>
           <div className="flex justify-between w-full">
             <div>
-              <h2 className="font-semibold">{t('Cart ID')}: {cart.id}</h2>
-              <p>{t('Total Products')}: {cart.totalProducts}</p>
-              <p>{t('Total Quantity')}: {cart.totalQuantity}</p>
+              <h2 className="font-semibold">
+                {t('Cart ID')}: {cart.id}
+              </h2>
+              <p>
+                {t('Total Products')}: {cart.totalProducts}
+              </p>
+              <p>
+                {t('Total Quantity')}: {cart.totalQuantity}
+              </p>
             </div>
             <div>
-              <p>{t('Total')}: ${cart.total.toFixed(2)}</p>
-              <p>{t('Discounted Total')}: ${cart.discountedTotal.toFixed(2)}</p>
+              <p>
+                {t('Total')}: ${cart.total.toFixed(2)}
+              </p>
+              <p>
+                {t('Discounted Total')}: ${cart.discountedTotal.toFixed(2)}
+              </p>
             </div>
           </div>
         </AccordionTrigger>
@@ -59,7 +69,10 @@ export default function SavedCart({ cart, locale }: Readonly<SavedCartProps>) {
           <AlertDialogHeader>
             <AlertDialogTitle>{t('Are you absolutely sure?')}</AlertDialogTitle>
             <AlertDialogDescription>
-              {t('This will abandon your current active cart and replace it with the saved cart (ID: {cartId}).', { cartId: cart.id })}
+              {t(
+                'This will abandon your current active cart and replace it with the saved cart (ID: {cartId}).',
+                { cartId: cart.id }
+              )}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

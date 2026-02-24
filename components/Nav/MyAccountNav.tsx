@@ -14,7 +14,7 @@ type MyAccountNavProps = {
 
 export default function MyAccountNav({ locale }: Readonly<MyAccountNavProps>) {
   const t = useTranslations('Nav');
-  
+
   return (
     <NavigationMenu className="hidden md:block">
       <NavigationMenuList>

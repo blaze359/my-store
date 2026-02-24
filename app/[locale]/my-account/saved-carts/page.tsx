@@ -10,7 +10,9 @@ export default async function MySavedCartsPage() {
   const t = await getTranslations('MyAccount');
   return (
     <div className="my-6">
-      <h1 className="font-bold text-2xl">{t('My Saved Carts')} ({savedCartsData.total})</h1>
+      <h1 className="font-bold text-2xl">
+        {t('My Saved Carts')} ({savedCartsData.total})
+      </h1>
       {savedCartsData.carts.length <= 0 ? (
         <p className="mt-4">{t('You have no saved carts.')}</p>
       ) : (

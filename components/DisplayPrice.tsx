@@ -26,7 +26,9 @@ export default function DisplayPrice({
           <div>{formatCurrency(price - (price * (discountPercentage ?? 0)) / 100, locale)}</div>
         </div>
       ) : (
-        <div>{t('Price')}: {formatCurrency(price, locale)}</div>
+        <div>
+          {t('Price')}: {formatCurrency(price, locale)}
+        </div>
       )}
     </>
   );

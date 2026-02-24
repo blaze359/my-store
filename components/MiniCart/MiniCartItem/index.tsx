@@ -54,7 +54,11 @@ const MiniCartItem = ({ cartItem, closeOnLinkClick = false, onLinkClick }: CartI
           <p className="text-gray-500">Qty {cartItem?.quantity}</p>
 
           <div className="flex">
-            <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer" onClick={() => cartStore.removeFromCart(cartItem.id)}>
+            <button
+              type="button"
+              className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer"
+              onClick={() => cartStore.removeFromCart(cartItem.id)}
+            >
               {t('Remove')}
             </button>
           </div>

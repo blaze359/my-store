@@ -100,13 +100,16 @@ function MobileList({
   categoryData,
 }: Readonly<{ title: string; categories: readonly string[]; categoryData?: Category[] }>) {
   const t = useTranslations('Nav');
-  
+
   if (categories.length === 0) {
     return null;
   }
 
   if (categories.length === 1) {
-    const cat = categoryData?.find((cat) => cat.slug === categories[0]) || { slug: categories[0], name: categories[0] };
+    const cat = categoryData?.find((cat) => cat.slug === categories[0]) || {
+      slug: categories[0],
+      name: categories[0],
+    };
     return (
       <SheetClose asChild className="">
         <Link

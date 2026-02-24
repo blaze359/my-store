@@ -30,7 +30,9 @@ export default async function SearchPage({
 
   return (
     <div>
-      <h2 className="text-2xl font-bold">{t('Results for')}: {query}</h2>
+      <h2 className="text-2xl font-bold">
+        {t('Results for')}: {query}
+      </h2>
       <div className="flex flex-wrap gap-4 mt-4">
         {searchResults.length > 0 ? (
           searchResults.map((product) => (

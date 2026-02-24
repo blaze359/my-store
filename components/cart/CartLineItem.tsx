@@ -35,10 +35,14 @@ export default function CartLineItem({ cartItem, locale }: Readonly<CartItemProp
             discountPercentage={cartItem.discountPercentage}
             locale={locale}
           />
-          <p>{t('Quantity')}: {cartItem.quantity}</p>
+          <p>
+            {t('Quantity')}: {cartItem.quantity}
+          </p>
         </div>
         <div>
-          <p>{t('Total')}: ${(cartItem.discountedTotal * cartItem.quantity).toFixed(2)}</p>
+          <p>
+            {t('Total')}: ${(cartItem.discountedTotal * cartItem.quantity).toFixed(2)}
+          </p>
           <button
             className="text-sm text-red-500 hover:underline"
             onClick={() => cartStore.removeFromCart(cartItem.id)}

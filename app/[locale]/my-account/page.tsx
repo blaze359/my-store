@@ -20,9 +20,15 @@ export default async function MyAccountPage() {
           />
         </div>
         <div>
-          <p>{t('Username')}: {profileDate.username}</p>
-          <p>{t('Email')}: {profileDate.email}</p>
-          <p>{t('Phone')}: {profileDate.phone}</p>
+          <p>
+            {t('Username')}: {profileDate.username}
+          </p>
+          <p>
+            {t('Email')}: {profileDate.email}
+          </p>
+          <p>
+            {t('Phone')}: {profileDate.phone}
+          </p>
         </div>
       </div>
     </div>

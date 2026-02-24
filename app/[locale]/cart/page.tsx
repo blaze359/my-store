@@ -17,7 +17,9 @@ const CartPage = observer(function CartPage() {
   }
   return (
     <div className="my-6">
-      <h1 className="font-bold text-2xl">{t('Cart')} ({cartStore.cart.totalProducts})</h1>
+      <h1 className="font-bold text-2xl">
+        {t('Cart')} ({cartStore.cart.totalProducts})
+      </h1>
       <button className="text-sm text-primary hover:underline" onClick={cartStore.clearCart}>
         {t('Clear Cart')}
       </button>

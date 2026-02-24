@@ -1,7 +1,7 @@
-import { useLocale, useTranslations } from "next-intl";
-import LanguageNav from "./LanguageNav";
-import MobileNav from "./MobileNav";
-import Link from "next/link";
+import { useLocale, useTranslations } from 'next-intl';
+import LanguageNav from './LanguageNav';
+import MobileNav from './MobileNav';
+import Link from 'next/link';
 
 export default function Banner() {
   const locale = useLocale();

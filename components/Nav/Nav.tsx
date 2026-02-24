@@ -70,7 +70,10 @@ function List({
   }
 
   if (categories.length === 1) {
-    const cat = categoryData?.find((cat) => cat.slug === categories[0]) || { slug: categories[0], name: categories[0] };
+    const cat = categoryData?.find((cat) => cat.slug === categories[0]) || {
+      slug: categories[0],
+      name: categories[0],
+    };
     return (
       <NavigationMenuLink href={`/products/${cat?.slug}`} title={cat?.name} className="">
         {t(cat.name)}

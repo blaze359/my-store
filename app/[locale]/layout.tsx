@@ -51,7 +51,7 @@ export default async function LocaleLayout({
               />
             </Link>
             <div className="flex flex-row gap-4 items-center h-10">
-              <Search className="hidden"/>
+              <Search className="hidden" />
               <MyAccountNav locale={locale} />
               <MobileMiniCart />
               <MiniCart />
