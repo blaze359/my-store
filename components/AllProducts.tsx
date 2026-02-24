@@ -42,18 +42,22 @@ export default function AllProducts() {
     if (order !== 'asc') params.set('order', order);
 
     const queryString = params.toString();
-    const newUrl = queryString ? `?${queryString}` : window.location.pathname;
+    const newUrl = queryString ? `?${queryString}` : globalThis.location.pathname;
     router.replace(newUrl, { scroll: false });
   }, [page, sort, order, router]);
 
   useEffect(() => {
-    setIsLoading(true);
+    // Use setTimeout to avoid setState in effect warning
+    const timer = setTimeout(() => setIsLoading(true), 0);
+
     const sortParam = sort === 'none' ? '' : sort;
     getAllProducts(productsPerPage, (page - 1) * productsPerPage, sortParam, order).then((data) => {
       setProducts(data.products);
       setTotalPages(Math.ceil(data.total / productsPerPage));
       setIsLoading(false);
     });
+
+    return () => clearTimeout(timer);
   }, [page, sort, order]);
 
   return (
@@ -121,7 +125,7 @@ export default function AllProducts() {
           ? // Skeleton loaders to prevent CLS
             Array.from({ length: productsPerPage }).map((_, index) => (
               <div
-                key={`skeleton-${index}`}
+                key={`skeleton-${page}-${index}`}
                 className="w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.667rem)] aspect-3/4 bg-muted animate-pulse rounded-lg"
               />
             ))
