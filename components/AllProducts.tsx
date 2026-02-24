@@ -114,8 +114,8 @@ export default function AllProducts() {
         </div>
       </div>
       <div className="flex flex-wrap gap-4 mt-4">
-        {products.map((product: Product) => (
-          <ProductCard key={product.id} product={product} locale="en" />
+        {products.map((product: Product, index: number) => (
+          <ProductCard key={product.id} product={product} locale="en" priority={index === 0} />
         ))}
       </div>
     </>

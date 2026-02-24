@@ -46,7 +46,7 @@ export default async function LocaleLayout({
                 src="/logo-image.jpg"
                 alt="Logo"
                 width={150}
-                height={150}
+                height={112}
                 className="w-15 h-15 sm:w-32 sm:h-32 m-2"
               />
             </Link>

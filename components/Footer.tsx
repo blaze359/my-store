@@ -55,7 +55,8 @@ export default function Footer() {
           showCloseButton={false}
           onInteractOutside={(e) => e.preventDefault()}
           onEscapeKeyDown={(e) => e.preventDefault()}
-          className="p-6"
+          className="p-6 fixed"
+          style={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
         >
           <SheetHeader>
             <SheetTitle>{t('Translation Disclaimer')}</SheetTitle>

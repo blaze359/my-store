@@ -12,9 +12,10 @@ import { useRouter } from 'next/navigation';
 interface ProductData {
   product: Product;
   locale: string;
+  priority?: boolean;
 }
 
-export default function ProductCard({ product, locale }: Readonly<ProductData>) {
+export default function ProductCard({ product, locale, priority = false }: Readonly<ProductData>) {
   const router = useRouter();
 
   const handleCardClick = () => {
@@ -33,6 +34,7 @@ export default function ProductCard({ product, locale }: Readonly<ProductData>) 
           alt={product.title}
           className="h-full w-full object-cover"
           fill
+          priority={priority}
           style={{ objectFit: 'contain' }}
         />
       </div>
