@@ -13,7 +13,7 @@ export default function StockStatus({ status }: Readonly<{ status: string }>) {
     colorClass = 'text-green-800';
     icon = faCircleCheck;
   } else if (status === 'Low Stock') {
-    colorClass = 'text-yellow-700';
+    colorClass = 'text-yellow-800';
     icon = faCircleExclamation;
   } else if (status === 'Out of Stock') {
     colorClass = 'text-red-800';

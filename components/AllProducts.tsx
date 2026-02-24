@@ -24,6 +24,7 @@ export default function AllProducts() {
   const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
   const [totalPages, setTotalPages] = useState(1);
   const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [sort, setSort] = useState<sortOptions>(
     (searchParams.get('sort') as sortOptions) || 'none'
   );
@@ -46,10 +47,12 @@ export default function AllProducts() {
   }, [page, sort, order, router]);
 
   useEffect(() => {
+    setIsLoading(true);
     const sortParam = sort === 'none' ? '' : sort;
     getAllProducts(productsPerPage, (page - 1) * productsPerPage, sortParam, order).then((data) => {
       setProducts(data.products);
       setTotalPages(Math.ceil(data.total / productsPerPage));
+      setIsLoading(false);
     });
   }, [page, sort, order]);
 
@@ -114,9 +117,17 @@ export default function AllProducts() {
         </div>
       </div>
       <div className="flex flex-wrap gap-4 mt-4">
-        {products.map((product: Product, index: number) => (
-          <ProductCard key={product.id} product={product} locale="en" priority={index === 0} />
-        ))}
+        {isLoading
+          ? // Skeleton loaders to prevent CLS
+            Array.from({ length: productsPerPage }).map((_, index) => (
+              <div
+                key={`skeleton-${index}`}
+                className="w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.667rem)] aspect-3/4 bg-muted animate-pulse rounded-lg"
+              />
+            ))
+          : products.map((product: Product, index: number) => (
+              <ProductCard key={product.id} product={product} locale="en" priority={index === 0} />
+            ))}
       </div>
     </>
   );
