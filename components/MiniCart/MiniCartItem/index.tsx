@@ -2,6 +2,8 @@ import Image from 'next/image';
 import { CartItem } from '@/lib/cartTypes';
 import Link from 'next/link';
 import { SheetClose } from '@/components/ui/sheet';
+import { useTranslations } from 'next-intl';
+import cartStore from '@/lib/cartStore';
 
 interface CartItemData {
   cartItem: CartItem;
@@ -10,6 +12,7 @@ interface CartItemData {
 }
 
 const MiniCartItem = ({ cartItem, closeOnLinkClick = false, onLinkClick }: CartItemData) => {
+  const t = useTranslations('Cart');
   return (
     <li className="flex flex-row gap-2 m-2">
       <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200 relative">
@@ -51,8 +54,8 @@ const MiniCartItem = ({ cartItem, closeOnLinkClick = false, onLinkClick }: CartI
           <p className="text-gray-500">Qty {cartItem?.quantity}</p>
 
           <div className="flex">
-            <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500">
-              Remove
+            <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer" onClick={() => cartStore.removeFromCart(cartItem.id)}>
+              {t('Remove')}
             </button>
           </div>
         </div>

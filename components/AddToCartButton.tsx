@@ -3,6 +3,7 @@
 import cartStore from '@/lib/cartStore';
 import { Button } from '@/components/ui/button';
 import { Product } from '@/lib/productTypes';
+import { useTranslations } from 'next-intl';
 
 type AddToCartButtonProps = {
   product: Product;
@@ -10,6 +11,7 @@ type AddToCartButtonProps = {
 };
 
 export default function AddToCartButton({ product, className }: Readonly<AddToCartButtonProps>) {
+  const t = useTranslations('Product');
   function handleClick() {
     console.log('Adding to cart:', product);
     if (!product) return;
@@ -29,7 +31,7 @@ export default function AddToCartButton({ product, className }: Readonly<AddToCa
 
   return (
     <Button className={`${className ?? ''} max-w-60`} onClick={() => handleClick()}>
-      Add to Cart
+      {t('Add to Cart')}
     </Button>
   );
 }

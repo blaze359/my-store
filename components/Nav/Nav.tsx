@@ -20,6 +20,7 @@ import {
 } from '@/lib/constants';
 import { getCategories } from '@/app/actions/api';
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export default function Nav() {
   const [cats, setCats] = useState<Category[]>([]);
@@ -63,22 +64,23 @@ function List({
   categories,
   categoryData,
 }: Readonly<{ title: string; categories: readonly string[]; categoryData?: Category[] }>) {
+  const t = useTranslations('Nav');
   if (categories.length === 0) {
     return null;
   }
 
   if (categories.length === 1) {
-    const cat = categoryData?.find((cat) => cat.slug === categories[0]);
+    const cat = categoryData?.find((cat) => cat.slug === categories[0]) || { slug: categories[0], name: categories[0] };
     return (
       <NavigationMenuLink href={`/products/${cat?.slug}`} title={cat?.name} className="">
-        {cat?.name}
+        {t(cat.name)}
       </NavigationMenuLink>
     );
   }
 
   return (
     <>
-      <NavigationMenuTrigger>{title}</NavigationMenuTrigger>
+      <NavigationMenuTrigger>{t(title)}</NavigationMenuTrigger>
       <NavigationMenuContent className="bg-white">
         {categories.map((category) => {
           const cat = categoryData?.find((cat) => cat.slug === category);
@@ -90,7 +92,7 @@ function List({
                 title={cat.name}
                 className="block px-4 py-2 hover:font-bold w-45"
               >
-                {cat.name}
+                {t(cat.name)}
               </NavigationMenuLink>
             );
           }

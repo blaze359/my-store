@@ -16,8 +16,10 @@ import {
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetClose } from '../ui/sheet';
 import Link from 'next/link';
 import Search from './Search';
+import { useTranslations } from 'next-intl';
 export default function MobileNav() {
   const [cats, setCats] = useState<Category[]>([]);
+  const t = useTranslations('Nav');
 
   useEffect(() => {
     async function fetchCategories() {
@@ -34,7 +36,7 @@ export default function MobileNav() {
           <FontAwesomeIcon icon={faBars} className="md:hidden py-2 px-4" />
         </SheetTrigger>
         <SheetContent side="left" className="w-full p-6">
-          <SheetTitle className="font-black text-2xl md:text-4xl mb-4">Menu</SheetTitle>
+          <SheetTitle className="font-black text-2xl md:text-4xl mb-4">{t('Menu')}</SheetTitle>
           <Search />
           <Accordion type="single" collapsible className="w-full mt-4">
             <AccordionItem value="home">
@@ -97,12 +99,14 @@ function MobileList({
   categories,
   categoryData,
 }: Readonly<{ title: string; categories: readonly string[]; categoryData?: Category[] }>) {
+  const t = useTranslations('Nav');
+  
   if (categories.length === 0) {
     return null;
   }
 
   if (categories.length === 1) {
-    const cat = categoryData?.find((cat) => cat.slug === categories[0]);
+    const cat = categoryData?.find((cat) => cat.slug === categories[0]) || { slug: categories[0], name: categories[0] };
     return (
       <SheetClose asChild className="">
         <Link
@@ -110,7 +114,7 @@ function MobileList({
           title={cat?.name}
           className=""
         >
-          {cat?.name}
+          {t(cat.name)}
         </Link>
       </SheetClose>
     );
@@ -118,7 +122,7 @@ function MobileList({
 
   return (
     <>
-      <AccordionTrigger>{title}</AccordionTrigger>
+      <AccordionTrigger>{t(title)}</AccordionTrigger>
       <AccordionContent className="bg-white">
         {categories.map((category) => {
           const cat = categoryData?.find((cat) => cat.slug === category);
@@ -130,7 +134,7 @@ function MobileList({
                   title={cat.name}
                   className="block px-4 py-2 hover:font-bold w-45"
                 >
-                  {cat.name}
+                  {t(cat.name)}
                 </Link>
               </SheetClose>
             );

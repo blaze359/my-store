@@ -40,7 +40,7 @@ export default function ProductCard({ product, locale }: Readonly<ProductData>) 
         <CardTitle>{product.title}</CardTitle>
         <CardDescription>{product.description}</CardDescription>
         <StarRating value={product.rating} readOnly />
-        <CardFooter className="font-bold flex flex-row justify-between items-baseline">
+        <CardFooter className="font-bold flex flex-row justify-between items-center align-middle">
           <StockStatus status={product.availabilityStatus} />
           <DisplayPrice
             price={product.price}

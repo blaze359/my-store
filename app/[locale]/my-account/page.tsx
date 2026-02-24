@@ -1,9 +1,10 @@
 import { getUserProfile } from '@/app/actions/api';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 
 export default async function MyAccountPage() {
   const profileDate = await getUserProfile(1);
-
+  const t = await getTranslations('MyAccount');
   return (
     <div className="my-6">
       <h1 className="font-bold text-2xl">
@@ -19,9 +20,9 @@ export default async function MyAccountPage() {
           />
         </div>
         <div>
-          <p>Username: {profileDate.username}</p>
-          <p>Email: {profileDate.email}</p>
-          <p>Phone: {profileDate.phone}</p>
+          <p>{t('Username')}: {profileDate.username}</p>
+          <p>{t('Email')}: {profileDate.email}</p>
+          <p>{t('Phone')}: {profileDate.phone}</p>
         </div>
       </div>
     </div>

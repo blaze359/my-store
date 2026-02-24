@@ -3,6 +3,7 @@ import { CartItem } from '@/lib/cartTypes';
 import Image from 'next/image';
 import Link from 'next/link';
 import DisplayPrice from '../DisplayPrice';
+import { useTranslations } from 'next-intl';
 
 interface CartItemProps {
   cartItem: CartItem;
@@ -10,6 +11,7 @@ interface CartItemProps {
 }
 
 export default function CartLineItem({ cartItem, locale }: Readonly<CartItemProps>) {
+  const t = useTranslations('Cart');
   return (
     <div className="border-b py-4 flex gap-4">
       <div>
@@ -33,15 +35,15 @@ export default function CartLineItem({ cartItem, locale }: Readonly<CartItemProp
             discountPercentage={cartItem.discountPercentage}
             locale={locale}
           />
-          <p>Quantity: {cartItem.quantity}</p>
+          <p>{t('Quantity')}: {cartItem.quantity}</p>
         </div>
         <div>
-          <p>Total: ${(cartItem.discountedTotal * cartItem.quantity).toFixed(2)}</p>
+          <p>{t('Total')}: ${(cartItem.discountedTotal * cartItem.quantity).toFixed(2)}</p>
           <button
             className="text-sm text-red-500 hover:underline"
             onClick={() => cartStore.removeFromCart(cartItem.id)}
           >
-            Remove
+            {t('Remove')}
           </button>
         </div>
       </div>

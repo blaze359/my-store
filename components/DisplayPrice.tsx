@@ -1,4 +1,5 @@
 import { formatCurrency, cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 type DisplayPriceProps = {
   price: number;
@@ -15,16 +16,17 @@ export default function DisplayPrice({
   locale,
   displayPercentage = true,
 }: Readonly<DisplayPriceProps>) {
+  const t = useTranslations('Product');
   return (
     <>
       {discountPercentage ? (
-        <div className={cn('flex gap-2', className)}>
+        <div className={cn('flex gap-2 flex-col', className)}>
           <div className="line-through text-red-500">{formatCurrency(price, locale)}</div>
           {displayPercentage && <div>({discountPercentage}%)</div>}
           <div>{formatCurrency(price - (price * (discountPercentage ?? 0)) / 100, locale)}</div>
         </div>
       ) : (
-        <div>Price: {formatCurrency(price, locale)}</div>
+        <div>{t('Price')}: {formatCurrency(price, locale)}</div>
       )}
     </>
   );

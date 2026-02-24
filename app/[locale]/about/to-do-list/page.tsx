@@ -5,7 +5,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as faCircleRegular } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import {
   Accordion,
   AccordionContent,
@@ -29,13 +29,19 @@ function renderStatusIcon(status: string) {
 
 type Task = {
   id: number;
-  task: string;
+  task: {
+    en: string;
+    es: string;
+    fr: string;
+  };
   status: string;
 };
 
 export default async function ToDoListPage() {
   const t = await getTranslations('About');
   const toDoList = (await getDynamicConfig('to_do')) as { list: Task[] };
+  const locale = (await getLocale()) as 'en' | 'es' | 'fr';
+  console.log('locale', locale);
 
   const openTasks = toDoList?.list.filter((item) => item.status === 'open');
   const startedTasks = toDoList?.list.filter((item) => item.status === 'started');
@@ -57,7 +63,7 @@ export default async function ToDoListPage() {
               {openTasks.map((item) => (
                 <div key={item.id} className="flex gap-4 items-center">
                   {renderStatusIcon(item.status)}
-                  <p>{item.task}</p>
+                  <p>{item.task[locale]}</p>
                 </div>
               ))}
             </div>
@@ -72,7 +78,7 @@ export default async function ToDoListPage() {
               {startedTasks.map((item) => (
                 <div key={item.id} className="flex gap-4 items-center">
                   {renderStatusIcon(item.status)}
-                  <p>{item.task}</p>
+                  <p>{item.task[locale]}</p>
                 </div>
               ))}
             </div>
@@ -87,7 +93,7 @@ export default async function ToDoListPage() {
               {doneTasks.map((item) => (
                 <div key={item.id} className="flex gap-4 items-center">
                   {renderStatusIcon(item.status)}
-                  <p>{item.task}</p>
+                  <p>{item.task[locale]}</p>
                 </div>
               ))}
             </div>

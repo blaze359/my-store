@@ -9,8 +9,10 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import { useTranslations } from 'next-intl';
 
 export default observer(() => {
+  const t = useTranslations('Nav');
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
@@ -58,7 +60,7 @@ export default observer(() => {
           onMouseLeave={() => setOpen(false)}
         >
           <h2 className="text-lg font-medium text-gray-900" id="slide-over-title">
-            Shopping cart
+            {t('Shopping cart')}
           </h2>
           <hr />
           {mounted && cartStore.cart.totalProducts > 0 ? (
@@ -74,11 +76,11 @@ export default observer(() => {
               })}
             </ul>
           ) : (
-            <div className="m-2">Your cart is empty.</div>
+            <div className="m-2">{t('Your cart is currently empty')}</div>
           )}
           <Button className="w-full" onClick={() => setOpen(false)}>
             <Link href="/cart" className="w-full h-full block">
-              View Cart
+              {t('View Cart')}
             </Link>
           </Button>
         </PopoverContent>

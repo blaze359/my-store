@@ -2,16 +2,17 @@ import { getCartsByUser } from '@/app/actions/api';
 import SavedCart from '@/components/cart/SavedCart';
 import { Accordion } from '@/components/ui/accordion';
 import { CartType } from '@/lib/cartTypes';
-import { getLocale } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 export default async function MySavedCartsPage() {
   const locale = await getLocale();
   const savedCartsData = await getCartsByUser('33');
+  const t = await getTranslations('MyAccount');
   return (
     <div className="my-6">
-      <h1 className="font-bold text-2xl">My Saved Carts ({savedCartsData.total})</h1>
+      <h1 className="font-bold text-2xl">{t('My Saved Carts')} ({savedCartsData.total})</h1>
       {savedCartsData.carts.length <= 0 ? (
-        <p className="mt-4">You have no saved carts.</p>
+        <p className="mt-4">{t('You have no saved carts.')}</p>
       ) : (
         <div className="mt-4 space-y-6">
           <Accordion type="single" collapsible>

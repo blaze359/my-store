@@ -6,29 +6,32 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
+import { useTranslations } from 'next-intl';
 
 type MyAccountNavProps = {
   locale: string;
 };
 
 export default function MyAccountNav({ locale }: Readonly<MyAccountNavProps>) {
+  const t = useTranslations('Nav');
+  
   return (
     <NavigationMenu className="hidden md:block">
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>My Account</NavigationMenuTrigger>
+          <NavigationMenuTrigger>{t('My Account')}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <NavigationMenuLink
               href={`/${locale}/my-account`}
               className="w-35 hover:bg-secondary hover:font-bold"
             >
-              My Profile
+              {t('My Profile')}
             </NavigationMenuLink>
             <NavigationMenuLink
               href={`/${locale}/my-account/saved-carts`}
               className="w-35 hover:bg-secondary hover:font-bold"
             >
-              My Saved Carts
+              {t('My Saved Carts')}
             </NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
