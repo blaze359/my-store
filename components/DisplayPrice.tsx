@@ -21,7 +21,7 @@ export default function DisplayPrice({
     <>
       {discountPercentage ? (
         <div className={cn('flex gap-2 flex-col', className)}>
-          <div className="line-through text-red-700">{formatCurrency(price, locale)}</div>
+          <div className="line-through text-red-800">{formatCurrency(price, locale)}</div>
           {displayPercentage && <div>({discountPercentage}%)</div>}
           <div>{formatCurrency(price - (price * (discountPercentage ?? 0)) / 100, locale)}</div>
         </div>

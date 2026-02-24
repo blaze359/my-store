@@ -37,20 +37,32 @@ function setCookie(name: string, value: string, days: number): void {
 export default function DisclaimerSheet() {
   const t = useTranslations('Footer');
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [shouldMount, setShouldMount] = useState(false);
 
   useEffect(() => {
     // Only check cookie after mount to avoid hydration issues
     const hasConfirmed = getCookie(COOKIE_NAME);
     if (!hasConfirmed) {
-      // Use setTimeout to ensure the sheet opens after initial render is complete
-      setTimeout(() => setIsSheetOpen(true), 100);
+      // Use setTimeout to avoid setState in effect warning and prevent CLS
+      const mountTimer = setTimeout(() => {
+        setShouldMount(true);
+        // Open sheet after mounting
+        setTimeout(() => setIsSheetOpen(true), 100);
+      }, 0);
+      return () => clearTimeout(mountTimer);
     }
   }, []);
 
   const handleConfirm = () => {
     setCookie(COOKIE_NAME, 'true', COOKIE_EXPIRY_DAYS);
     setIsSheetOpen(false);
+    setShouldMount(false);
   };
+
+  // Don't mount Sheet component at all if not needed
+  if (!shouldMount) {
+    return null;
+  }
 
   return (
     <Sheet open={isSheetOpen} onOpenChange={() => {}}>
