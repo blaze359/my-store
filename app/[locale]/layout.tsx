@@ -14,8 +14,15 @@ import MobileMiniCart from '@/components/MobileMiniCart';
 import Banner from '@/components/Nav/Banner';
 import Footer from '@/components/Footer';
 import DisclaimerSheet from '@/components/DisclaimerSheet';
+import type { Metadata } from 'next';
 
 type Locale = (typeof routing.locales)[number];
+
+export const metadata: Metadata = {
+  title: 'My Store - Quality Products at Great Prices',
+  description:
+    'Discover a wide selection of beauty, fragrances, furniture, and groceries. Shop now for the best deals on quality products.',
+};
 
 export default async function LocaleLayout({
   children,

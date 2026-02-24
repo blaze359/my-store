@@ -55,6 +55,7 @@ export default function DisclaimerSheet() {
         onInteractOutside={(e) => e.preventDefault()}
         onEscapeKeyDown={(e) => e.preventDefault()}
         className="p-6"
+        style={{ willChange: 'transform', transform: 'translateZ(0)' }}
       >
         <SheetHeader>
           <SheetTitle>{t('Translation Disclaimer')}</SheetTitle>

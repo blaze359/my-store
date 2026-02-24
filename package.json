@@ -10,7 +10,11 @@
     "lint:fix": "eslint --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "deploy": "npm run lint && npm run format && next build && next start"
+    "deploy": "npm run lint && npm run format && next build && next start",
+    "lighthouse": "lhci autorun",
+    "lighthouse:local": "lhci autorun --config=lighthouserc.local.json",
+    "lighthouse:collect": "lhci collect",
+    "lighthouse:assert": "lhci assert"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
@@ -36,6 +40,7 @@
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.14.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
