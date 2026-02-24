@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Sheet,
   SheetContent,
@@ -36,11 +36,16 @@ function setCookie(name: string, value: string, days: number): void {
 
 export default function DisclaimerSheet() {
   const t = useTranslations('Footer');
-  const [isSheetOpen, setIsSheetOpen] = useState(() => {
-    // Check if cookie exists on initial render
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  useEffect(() => {
+    // Only check cookie after mount to avoid hydration issues
     const hasConfirmed = getCookie(COOKIE_NAME);
-    return !hasConfirmed;
-  });
+    if (!hasConfirmed) {
+      // Use setTimeout to ensure the sheet opens after initial render is complete
+      setTimeout(() => setIsSheetOpen(true), 100);
+    }
+  }, []);
 
   const handleConfirm = () => {
     setCookie(COOKIE_NAME, 'true', COOKIE_EXPIRY_DAYS);
