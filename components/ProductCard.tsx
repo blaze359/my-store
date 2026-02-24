@@ -35,6 +35,7 @@ export default function ProductCard({ product, locale, priority = false }: Reado
           className="h-full w-full object-cover"
           fill
           priority={priority}
+          fetchPriority={priority ? 'high' : 'auto'}
           style={{ objectFit: 'contain' }}
         />
       </div>

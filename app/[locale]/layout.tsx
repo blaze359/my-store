@@ -13,6 +13,7 @@ import MiniCart from '@/components/MiniCart';
 import MobileMiniCart from '@/components/MobileMiniCart';
 import Banner from '@/components/Nav/Banner';
 import Footer from '@/components/Footer';
+import DisclaimerSheet from '@/components/DisclaimerSheet';
 
 type Locale = (typeof routing.locales)[number];
 
@@ -47,7 +48,8 @@ export default async function LocaleLayout({
                 alt="Logo"
                 width={150}
                 height={112}
-                className="w-15 h-15 sm:w-32 sm:h-32 m-2"
+                className="w-15 sm:w-32 m-2"
+                style={{ height: 'auto' }}
               />
             </Link>
             <div className="flex flex-row gap-4 items-center h-10">
@@ -61,6 +63,7 @@ export default async function LocaleLayout({
           <div className="container border-b-2 border-primary" />
           {children}
           <Footer />
+          <DisclaimerSheet />
         </body>
       </NextIntlClientProvider>
     </html>
