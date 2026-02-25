@@ -4,7 +4,8 @@
       "url": [
         "http://localhost:3001/en",
         "http://localhost:3001/en/products/beauty",
-        "http://localhost:3001/en/product/1"
+        "http://localhost:3001/en/product/1",
+        "http://localhost:3001/en/cart"
       ],
       "numberOfRuns": 1,
       "settings": {

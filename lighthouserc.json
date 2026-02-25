@@ -4,7 +4,8 @@
       "url": [
         "https://my-store-hazel-chi.vercel.app/en",
         "https://my-store-hazel-chi.vercel.app/en/products/beauty",
-        "https://my-store-hazel-chi.vercel.app/en/product/1"
+        "https://my-store-hazel-chi.vercel.app/en/product/1",
+        "https://my-store-hazel-chi.vercel.app/en/cart"
       ],
       "numberOfRuns": 3,
       "settings": {
