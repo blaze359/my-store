@@ -9,13 +9,13 @@ type CheckoutContextType = {
 
 const CheckoutContext = createContext<CheckoutContextType | undefined>(undefined);
 
-export function CheckoutProvider({ children, step, setStep }: Readonly<{ children: ReactNode; step: number; setStep: (step: number) => void }>) {
+export function CheckoutProvider({
+  children,
+  step,
+  setStep,
+}: Readonly<{ children: ReactNode; step: number; setStep: (step: number) => void }>) {
   const value = useMemo(() => ({ step, setStep }), [step, setStep]);
-  return (
-    <CheckoutContext.Provider value={value}>
-      {children}
-    </CheckoutContext.Provider>
-  );
+  return <CheckoutContext.Provider value={value}>{children}</CheckoutContext.Provider>;
 }
 
 export function useCheckout() {

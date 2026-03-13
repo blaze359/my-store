@@ -2,7 +2,11 @@ import ConfirmationContent from '@/components/confirmation/ConfirmationContent';
 import ConfirmationGuard from '@/components/confirmation/ConfirmationGuard';
 import { getTranslations } from 'next-intl/server';
 
-export default async function ConfirmationPage({ params }: { readonly params: Promise<{ slug: string }> }) {
+export default async function ConfirmationPage({
+  params,
+}: {
+  readonly params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const t = await getTranslations('Confirmation');
 

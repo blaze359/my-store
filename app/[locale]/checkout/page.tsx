@@ -1,5 +1,5 @@
-import CheckoutGuard from "@/components/checkout/CheckoutGuard";
-import { getTranslations } from "next-intl/server";
+import CheckoutGuard from '@/components/checkout/CheckoutGuard';
+import { getTranslations } from 'next-intl/server';
 
 export default async function CheckoutPage() {
   const t = await getTranslations('Checkout');

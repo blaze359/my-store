@@ -6,7 +6,12 @@ import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 import { useCheckout } from './CheckoutContext';
 
 const CheckoutSummary = observer(function CheckoutSummary() {
@@ -104,28 +109,32 @@ const CheckoutSummary = observer(function CheckoutSummary() {
         <AccordionItem value="cart" className="border-none">
           <AccordionTrigger className="py-2 hover:no-underline">
             <div className="flex justify-between flex-1">
-              <span className="font-bold">{t("Cart")} ({cartStore.cart.totalQuantity})</span>
+              <span className="font-bold">
+                {t('Cart')} ({cartStore.cart.totalQuantity})
+              </span>
             </div>
           </AccordionTrigger>
           <AccordionContent>
-              <ul className="space-y-3">
-                {cartStore.cart.products.map((item) => (
-                  <li key={item.id} className="flex items-center gap-3">
-                    <Image
-                      src={item.thumbnail}
-                      alt={item.title}
-                      width={48}
-                      height={48}
-                      className="rounded-md object-contain size-12 shrink-0 border bg-white"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate">{item.title}</p>
-                      <p className="text-xs text-muted-foreground">{t('Qty')}: {item.quantity}</p>
-                    </div>
-                    <p className="text-sm font-medium shrink-0">${item.discountedTotal.toFixed(2)}</p>
-                  </li>
-                ))}
-              </ul>
+            <ul className="space-y-3">
+              {cartStore.cart.products.map((item) => (
+                <li key={item.id} className="flex items-center gap-3">
+                  <Image
+                    src={item.thumbnail}
+                    alt={item.title}
+                    width={48}
+                    height={48}
+                    className="rounded-md object-contain size-12 shrink-0 border bg-white"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium truncate">{item.title}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {t('Qty')}: {item.quantity}
+                    </p>
+                  </div>
+                  <p className="text-sm font-medium shrink-0">${item.discountedTotal.toFixed(2)}</p>
+                </li>
+              ))}
+            </ul>
           </AccordionContent>
         </AccordionItem>
       </Accordion>

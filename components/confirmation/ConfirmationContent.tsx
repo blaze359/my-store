@@ -39,7 +39,10 @@ function createSnapshot(orderSlug: string): ConfirmationSnapshot {
   };
 }
 
-export default function ConfirmationContent({ orderSlug, title }: Readonly<ConfirmationContentProps>) {
+export default function ConfirmationContent({
+  orderSlug,
+  title,
+}: Readonly<ConfirmationContentProps>) {
   const t = useTranslations('Confirmation');
   const [snapshot] = useState<ConfirmationSnapshot>(() => createSnapshot(orderSlug));
 
@@ -65,14 +68,16 @@ export default function ConfirmationContent({ orderSlug, title }: Readonly<Confi
           <strong>{t('Order')}:</strong> {snapshot.orderSlug}
         </p>
         <p>
-          <strong>{t('Items')}:</strong> {snapshot.totalProducts} ({snapshot.totalQuantity} {t('totalQuantity')})
+          <strong>{t('Items')}:</strong> {snapshot.totalProducts} ({snapshot.totalQuantity}{' '}
+          {t('totalQuantity')})
         </p>
         <p>
           <strong>{t('Total')}:</strong> ${snapshot.discountedTotal.toFixed(2)}
         </p>
         {snapshot.total > snapshot.discountedTotal ? (
           <p>
-            <strong>{t('Savings')}:</strong> ${(snapshot.total - snapshot.discountedTotal).toFixed(2)}
+            <strong>{t('Savings')}:</strong> $
+            {(snapshot.total - snapshot.discountedTotal).toFixed(2)}
           </p>
         ) : null}
         <p>
@@ -118,7 +123,9 @@ export default function ConfirmationContent({ orderSlug, title }: Readonly<Confi
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-medium leading-snug">{item.title}</p>
-                    <p className="text-sm text-muted-foreground mt-0.5">{t('Qty')}: {item.quantity}</p>
+                    <p className="text-sm text-muted-foreground mt-0.5">
+                      {t('Qty')}: {item.quantity}
+                    </p>
                     {item.discountedTotal < item.total && (
                       <p className="text-xs text-red-500 mt-0.5">
                         {t('Save')} ${(item.total - item.discountedTotal).toFixed(2)}

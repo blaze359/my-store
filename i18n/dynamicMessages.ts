@@ -29,7 +29,11 @@ export async function getDynamicMessages(locale: string): Promise<IntlMessages> 
 
   const sanitizedMessages = sanitizeMessageKeys(messages);
 
-  if (!sanitizedMessages || typeof sanitizedMessages !== 'object' || Array.isArray(sanitizedMessages)) {
+  if (
+    !sanitizedMessages ||
+    typeof sanitizedMessages !== 'object' ||
+    Array.isArray(sanitizedMessages)
+  ) {
     throw new Error(`Invalid translations payload for locale: ${locale}`);
   }
 

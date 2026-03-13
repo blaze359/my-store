@@ -45,9 +45,7 @@ export default function ShippingAddress() {
   );
 }
 
-function AddressForm({
-  onSubmit,
-}: Readonly<{ onSubmit: SubmitEventHandler<HTMLFormElement> }>) {
+function AddressForm({ onSubmit }: Readonly<{ onSubmit: SubmitEventHandler<HTMLFormElement> }>) {
   const t = useTranslations('Checkout');
   const { shippingAddress, email } = cartStore.cart;
 
@@ -123,9 +121,14 @@ function AddressForm({
 function ShippingAddressReadonly() {
   return (
     <div className="px-4">
-      <p>{cartStore.cart.shippingAddress.firstName} {cartStore.cart.shippingAddress.lastName}</p>
+      <p>
+        {cartStore.cart.shippingAddress.firstName} {cartStore.cart.shippingAddress.lastName}
+      </p>
       <p>{cartStore.cart.shippingAddress.address}</p>
-      <p>{cartStore.cart.shippingAddress.city}, {cartStore.cart.shippingAddress.state} {cartStore.cart.shippingAddress.postalCode}</p>
+      <p>
+        {cartStore.cart.shippingAddress.city}, {cartStore.cart.shippingAddress.state}{' '}
+        {cartStore.cart.shippingAddress.postalCode}
+      </p>
       <p>{cartStore.cart.email}</p>
     </div>
   );

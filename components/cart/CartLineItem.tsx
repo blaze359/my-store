@@ -30,7 +30,7 @@ export default function CartLineItem({ cartItem, locale }: Readonly<CartItemProp
           <Link href={`/product/${cartItem.id}`}>
             <h2 className="font-semibold">{cartItem.title}</h2>
           </Link>
-          <div className='flex flex-col-reverse'>
+          <div className="flex flex-col-reverse">
             <DisplayPrice
               price={cartItem.price}
               discountPercentage={cartItem.discountPercentage}
