@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import cartStore from '@/lib/cartStore';
 import { useTranslations } from 'next-intl';
+import { formatCurrency } from '@/lib/utils';
 
 interface SavedCartProps {
   cart: CartType;
@@ -47,10 +48,10 @@ export default function SavedCart({ cart, locale }: Readonly<SavedCartProps>) {
             </div>
             <div>
               <p>
-                {t('Total')}: ${cart.total.toFixed(2)}
+                {t('Total')}: {formatCurrency(cart.total, locale)}
               </p>
               <p>
-                {t('Discounted Total')}: ${cart.discountedTotal.toFixed(2)}
+                {t('Discounted Total')}: {formatCurrency(cart.discountedTotal, locale)}
               </p>
             </div>
           </div>

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import DisplayPrice from '../DisplayPrice';
 import { useTranslations } from 'next-intl';
+import { formatCurrency } from '@/lib/utils';
 
 interface CartItemProps {
   cartItem: CartItem;
@@ -43,7 +44,7 @@ export default function CartLineItem({ cartItem, locale }: Readonly<CartItemProp
         </div>
         <div>
           <p>
-            {t('Total')}: ${(cartItem.discountedTotal * cartItem.quantity).toFixed(2)}
+            {t('Total')}: {formatCurrency(cartItem.discountedTotal, locale)}
           </p>
           <button
             className="text-sm text-red-500 hover:underline"
