@@ -3,15 +3,7 @@ import { makePersistable } from 'mobx-persist-store';
 import { CartType, CartItem } from '@/lib/cartTypes';
 
 class CartStore {
-  cart: CartType = {
-    id: 0,
-    userId: 0,
-    total: 0,
-    discountedTotal: 0,
-    totalProducts: 0,
-    totalQuantity: 0,
-    products: [],
-  };
+  cart: CartType = this.createInitialCart();
 
   constructor() {
     makeObservable(this, {
@@ -19,10 +11,11 @@ class CartStore {
       addToCart: action,
       removeFromCart: action,
       clearCart: action,
+      resetCart: action,
     });
 
     // Initialize persistence only on the client
-    if (typeof globalThis !== 'undefined' && typeof globalThis.sessionStorage !== 'undefined') {
+    if (typeof globalThis !== 'undefined' && globalThis.sessionStorage !== undefined) {
       this.initializePersistence();
     }
   }
@@ -81,6 +74,11 @@ class CartStore {
     this.updateCartTotals();
   }
 
+  // Reset the full checkout and cart state after order confirmation
+  resetCart() {
+    this.cart = this.createInitialCart();
+  }
+
   // Private helper to recalculate totals
   private updateCartTotals() {
     this.cart.total = this.cart.products.reduce((sum, item) => sum + item.total, 0);
@@ -90,6 +88,30 @@ class CartStore {
     );
     this.cart.totalProducts = this.cart.products.length;
     this.cart.totalQuantity = this.cart.products.reduce((sum, item) => sum + item.quantity, 0);
+  }
+
+  private createInitialCart(): CartType {
+    return {
+      id: 0,
+      userId: 0,
+      total: 0,
+      discountedTotal: 0,
+      totalProducts: 0,
+      totalQuantity: 0,
+      products: [],
+      email: '',
+      shippingAddress: {
+        firstName: '',
+        lastName: '',
+        address: '',
+        city: '',
+        state: '',
+        postalCode: '',
+      },
+      shippingMethod: '',
+      paymentMethod: '',
+      orderPlaced: false,
+    };
   }
 }
 

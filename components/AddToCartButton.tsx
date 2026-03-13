@@ -4,6 +4,7 @@ import cartStore from '@/lib/cartStore';
 import { Button } from '@/components/ui/button';
 import { Product } from '@/lib/productTypes';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 type AddToCartButtonProps = {
   product: Product;
@@ -26,6 +27,10 @@ export default function AddToCartButton({ product, className }: Readonly<AddToCa
     };
 
     cartStore.addToCart(cartData, 1);
+    toast.success('Added to cart', {
+      description: product.title,
+      duration: 2000,
+    });
     console.log('Current cart state:', cartStore.cart);
   }
 

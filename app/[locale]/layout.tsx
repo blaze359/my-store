@@ -1,5 +1,4 @@
 import { NextIntlClientProvider } from 'next-intl';
-
 import { getDynamicMessages } from '@/i18n/dynamicMessages';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
@@ -14,6 +13,7 @@ import MobileMiniCart from '@/components/MobileMiniCart';
 import Banner from '@/components/Nav/Banner';
 import Footer from '@/components/Footer';
 import DisclaimerSheet from '@/components/DisclaimerSheet';
+import { Toaster } from '@/components/ui/sonner';
 import type { Metadata } from 'next';
 
 type Locale = (typeof routing.locales)[number];
@@ -28,8 +28,8 @@ export default async function LocaleLayout({
   children,
   params,
 }: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  readonly children: React.ReactNode;
+  readonly params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
 
@@ -71,6 +71,7 @@ export default async function LocaleLayout({
           {children}
           <Footer />
           <DisclaimerSheet />
+          <Toaster richColors closeButton position="top-right" />
         </body>
       </NextIntlClientProvider>
     </html>

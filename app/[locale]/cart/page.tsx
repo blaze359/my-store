@@ -1,69 +1,15 @@
-'use client';
-import CartLineItem from '@/components/cart/CartLineItem';
-import cartStore from '@/lib/cartStore';
-import { observer } from 'mobx-react-lite';
-import { useLocale, useTranslations } from 'next-intl';
-import { useEffect, useState } from 'react';
+import CartHeader from '@/components/cart/CartHeader';
+import CartItems from '@/components/cart/CartItems';
+import CartSummary from '@/components/cart/CartSummary';
 
-const CartPage = observer(function CartPage() {
-  const locale = useLocale();
-  const [mounted, setMounted] = useState(false);
-  const t = useTranslations('Cart');
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-  if (!mounted) {
-    return null;
-  }
+export default function CartPage() {
   return (
     <div className="my-6">
-      <h1 className="font-bold text-2xl">
-        {t('Cart')} ({cartStore.cart.totalProducts})
-      </h1>
-      <button className="text-sm text-primary hover:underline" onClick={cartStore.clearCart}>
-        {t('Clear Cart')}
-      </button>
+      <CartHeader />
       <div className="flex flex-col md:flex-row gap-10">
-        <div className="flex-1">
-          {cartStore.cart.totalProducts > 0 ? (
-            <div>
-              <div>
-                {cartStore.cart.products.map((item) => (
-                  <CartLineItem key={item.id} cartItem={item} locale={locale} />
-                ))}
-              </div>
-            </div>
-          ) : (
-            <p className="mt-4">{t('Your cart is currently empty')}</p>
-          )}
-        </div>
-        <div className="w-auto md:w-96 p-4 border rounded-2xl bg-primary/25 h-fit flex flex-col gap-4">
-          <h3 className="text-lg font-bold">{t('Summary')}</h3>
-          <hr className="border-secondary" />
-          <div className="font-bold flex justify-between">
-            <div>{t('SubTotal')}:</div>
-            <div>${cartStore.cart.total.toFixed(2)}</div>
-          </div>
-          {cartStore.cart.total > cartStore.cart.discountedTotal && (
-            <>
-              <div className="font-bold flex justify-between text-red-500">
-                <div>{t('Discount')}:</div>
-                <div>-${(cartStore.cart.total - cartStore.cart.discountedTotal).toFixed(2)}</div>
-              </div>
-              <div className="font-bold flex justify-between">
-                <div>{t('Total')}:</div>
-                <div>${cartStore.cart.discountedTotal.toFixed(2)}</div>
-              </div>
-            </>
-          )}
-          <hr className="border-secondary" />
-          <button className="w-full mt-4 bg-primary text-white py-2 rounded hover:bg-primary/90">
-            {t('Proceed to Checkout')}
-          </button>
-        </div>
+        <CartItems />
+        <CartSummary />
       </div>
     </div>
   );
-});
-
-export default CartPage;
+}

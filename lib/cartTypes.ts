@@ -17,4 +17,16 @@ export interface CartType {
   totalProducts: number;
   totalQuantity: number;
   products: CartItem[];
+  email: string;
+  shippingAddress: {
+    firstName: string;
+    lastName: string;
+    address: string;
+    city: string;
+    state: string;
+    postalCode: string;
+  };
+  shippingMethod: 'standard' | 'express' | '';
+  paymentMethod: 'creditCard' | 'paypal' | '';
+  orderPlaced: boolean;
 }
