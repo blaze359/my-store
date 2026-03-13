@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { hydrateStore } from 'mobx-persist-store';
 import cartStore from '@/lib/cartStore';
 import CheckoutFlow, { getSavedCheckoutStep } from './CheckoutFlow';
+import { Skeleton } from '../ui/skeleton';
 
 export default function CheckoutGuard() {
   const router = useRouter();
@@ -40,7 +41,22 @@ export default function CheckoutGuard() {
     };
   }, [router]);
 
-  if (!isReady || !canAccess) {
+  if (!isReady) {
+    return (
+      <div className="flex flex-col md:flex-row gap-10">
+        <div className="flex-1 space-y-4">
+          <Skeleton className="h-44 w-full rounded-2xl" />
+          <Skeleton className="h-32 w-full rounded-2xl" />
+          <Skeleton className="h-32 w-full rounded-2xl" />
+        </div>
+        <div className="w-auto md:w-96">
+          <Skeleton className="h-96 w-full rounded-2xl" />
+        </div>
+      </div>
+    );
+  }
+
+  if (!canAccess) {
     return null;
   }
 

@@ -12,6 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useCheckout } from './CheckoutContext';
 
 const CheckoutSummary = observer(function CheckoutSummary() {
@@ -44,7 +45,7 @@ const CheckoutSummary = observer(function CheckoutSummary() {
         <hr className="border-secondary" />
         <div className="font-bold flex justify-between">
           <div>{t('SubTotal')}:</div>
-          <div>$0.00</div>
+          <Skeleton className="h-5 w-16" />
         </div>
         <hr className="border-secondary" />
         {canCheckout ? (
@@ -62,11 +63,22 @@ const CheckoutSummary = observer(function CheckoutSummary() {
             <AccordionTrigger className="py-2 hover:no-underline">
               <div className="flex justify-between flex-1">
                 <span className="font-bold">Cart</span>
-                <span className="font-bold">$0.00</span>
+                <Skeleton className="h-5 w-16" />
               </div>
             </AccordionTrigger>
             <AccordionContent>
-              <p className="text-muted-foreground text-sm">Loading…</p>
+              <div className="space-y-3">
+                {['cart-loading-1', 'cart-loading-2'].map((placeholderKey) => (
+                  <div key={placeholderKey} className="flex items-center gap-3">
+                    <Skeleton className="size-12 rounded-md" />
+                    <div className="flex-1 space-y-2">
+                      <Skeleton className="h-4 w-3/4" />
+                      <Skeleton className="h-3 w-1/3" />
+                    </div>
+                    <Skeleton className="h-4 w-12" />
+                  </div>
+                ))}
+              </div>
             </AccordionContent>
           </AccordionItem>
         </Accordion>

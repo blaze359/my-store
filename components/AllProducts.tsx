@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import ProductCard from './ProductCard';
 import { Product } from '@/lib/productTypes';
 import { Button } from './ui/button';
+import { Skeleton } from './ui/skeleton';
 import {
   Select,
   SelectContent,
@@ -124,7 +125,7 @@ export default function AllProducts() {
         {isLoading
           ? // Skeleton loaders to prevent CLS
             Array.from({ length: productsPerPage }).map((_, index) => (
-              <div
+              <Skeleton
                 key={`skeleton-${page}-${index}`}
                 className="w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.667rem)] aspect-3/4 bg-muted animate-pulse rounded-lg"
               />
