@@ -1,5 +1,5 @@
 import { getProduct } from '@/app/actions/api';
-import AddToCartButton from '@/components/AddToCartButton';
+import AddToCartWithQuantity from '@/components/AddToCartWithQuantity';
 import DisplayPrice from '@/components/DisplayPrice';
 import ProductImageCarousel from '@/components/pdp/ProductImageCarousel';
 import StockStatus from '@/components/StockStatus';
@@ -7,9 +7,9 @@ import { StarRating } from '@/components/ui/StarRating';
 
 export default async function ProductPage({
   params,
-}: {
+}: Readonly<{
   params: Promise<{ slug: string; locale: string }>;
-}) {
+}>) {
   const { slug, locale } = await params;
   const product = await getProduct(slug);
 
@@ -37,7 +37,7 @@ export default async function ProductPage({
               locale={locale}
             />
           </div>
-          <AddToCartButton product={product} className="flex-1 max-w-md h-full" />
+          <AddToCartWithQuantity product={product} className="flex-1 max-w-md h-full" />
         </div>
         <div>
           <div>Return Policy: {product.returnPolicy}</div>

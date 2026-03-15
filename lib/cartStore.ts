@@ -9,6 +9,8 @@ class CartStore {
     makeObservable(this, {
       cart: observable,
       addToCart: action,
+      setItemQuantity: action,
+      updateItemQuantity: action,
       removeFromCart: action,
       clearCart: action,
       resetCart: action,
@@ -38,11 +40,14 @@ class CartStore {
     product: Omit<CartItem, 'quantity' | 'total' | 'discountedTotal'>,
     quantity: number = 1
   ) {
+    const normalizedQuantity = Math.floor(quantity);
+    if (normalizedQuantity <= 0) return;
+
     const existingItem = this.cart.products.find((item) => item.id === product.id);
 
     if (existingItem) {
       // Update quantity and totals if product exists
-      existingItem.quantity += quantity;
+      existingItem.quantity += normalizedQuantity;
       existingItem.total = existingItem.price * existingItem.quantity;
       existingItem.discountedTotal =
         existingItem.total - (existingItem.total * existingItem.discountPercentage) / 100;
@@ -50,10 +55,11 @@ class CartStore {
       // Add new product
       const newItem: CartItem = {
         ...product,
-        quantity,
-        total: product.price * quantity,
+        quantity: normalizedQuantity,
+        total: product.price * normalizedQuantity,
         discountedTotal:
-          product.price * quantity - (product.price * quantity * product.discountPercentage) / 100,
+          product.price * normalizedQuantity -
+          (product.price * normalizedQuantity * product.discountPercentage) / 100,
       };
       this.cart.products.push(newItem);
     }
@@ -66,6 +72,27 @@ class CartStore {
   removeFromCart(productId: number) {
     this.cart.products = this.cart.products.filter((item) => item.id !== productId);
     this.updateCartTotals();
+  }
+
+  // Set absolute quantity for a specific cart item
+  setItemQuantity(productId: number, quantity: number) {
+    const item = this.cart.products.find((cartItem) => cartItem.id === productId);
+    if (!item) return;
+
+    const normalizedQuantity = Math.max(1, Math.floor(quantity));
+    item.quantity = normalizedQuantity;
+    item.total = item.price * normalizedQuantity;
+    item.discountedTotal = item.total - (item.total * item.discountPercentage) / 100;
+
+    this.updateCartTotals();
+  }
+
+  // Update quantity by a positive/negative delta
+  updateItemQuantity(productId: number, delta: number) {
+    const item = this.cart.products.find((cartItem) => cartItem.id === productId);
+    if (!item) return;
+
+    this.setItemQuantity(productId, item.quantity + delta);
   }
 
   // Clear the entire cart
