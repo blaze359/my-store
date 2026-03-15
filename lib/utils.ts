@@ -26,7 +26,7 @@ function roundToCurrencyPrecision(amount: number, locale: string = 'en'): number
     style: 'currency',
     currency,
   });
-  const { maximumFractionDigits } = formatter.resolvedOptions();
+  const maximumFractionDigits = formatter.resolvedOptions().maximumFractionDigits ?? 2;
   const factor = 10 ** maximumFractionDigits;
 
   return Math.round((amount + Number.EPSILON) * factor) / factor;
