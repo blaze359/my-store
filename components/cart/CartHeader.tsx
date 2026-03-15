@@ -19,7 +19,7 @@ const CartHeader = observer(function CartHeader() {
       <h1 className="font-bold text-2xl">
         {t('Cart')}{' '}
         {mounted ? (
-          <span>({cartStore.cart.totalProducts})</span>
+          <span>({cartStore.cart.totalQuantity})</span>
         ) : (
           <Skeleton className="inline-block h-6 w-10 align-middle" />
         )}

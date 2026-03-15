@@ -5,6 +5,7 @@ import Image from 'next/image';
 import cartStore from '@/lib/cartStore';
 import type { CartItem, CartType } from '@/lib/cartTypes';
 import { useTranslations } from 'next-intl';
+import { hasEffectiveDiscount } from '@/lib/utils';
 
 type ConfirmationSnapshot = {
   orderSlug: string;
@@ -45,6 +46,7 @@ export default function ConfirmationContent({
 }: Readonly<ConfirmationContentProps>) {
   const t = useTranslations('Confirmation');
   const [snapshot] = useState<ConfirmationSnapshot>(() => createSnapshot(orderSlug));
+  const hasOrderDiscount = hasEffectiveDiscount(snapshot.total, snapshot.discountedTotal);
 
   useEffect(() => {
     const timeoutId = globalThis.setTimeout(() => {
@@ -74,7 +76,7 @@ export default function ConfirmationContent({
         <p>
           <strong>{t('Total')}:</strong> ${snapshot.discountedTotal.toFixed(2)}
         </p>
-        {snapshot.total > snapshot.discountedTotal ? (
+        {hasOrderDiscount ? (
           <p>
             <strong>{t('Savings')}:</strong> $
             {(snapshot.total - snapshot.discountedTotal).toFixed(2)}
@@ -126,14 +128,14 @@ export default function ConfirmationContent({
                     <p className="text-sm text-muted-foreground mt-0.5">
                       {t('Qty')}: {item.quantity}
                     </p>
-                    {item.discountedTotal < item.total && (
+                    {hasEffectiveDiscount(item.total, item.discountedTotal) && (
                       <p className="text-xs text-red-500 mt-0.5">
                         {t('Save')} ${(item.total - item.discountedTotal).toFixed(2)}
                       </p>
                     )}
                   </div>
                   <div className="text-right shrink-0">
-                    {item.discountedTotal < item.total && (
+                    {hasEffectiveDiscount(item.total, item.discountedTotal) && (
                       <p className="text-xs text-muted-foreground line-through">
                         ${item.total.toFixed(2)}
                       </p>
@@ -144,7 +146,7 @@ export default function ConfirmationContent({
               ))}
             </ul>
             <div className="border-t pt-3 space-y-1">
-              {snapshot.total > snapshot.discountedTotal && (
+              {hasOrderDiscount && (
                 <>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">{t('Subtotal')}</span>

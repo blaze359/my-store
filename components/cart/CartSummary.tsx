@@ -1,12 +1,15 @@
 'use client';
 
 import cartStore from '@/lib/cartStore';
+import { hasEffectiveDiscount } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 import { observer } from 'mobx-react-lite';
 import Link from 'next/link';
 
 const CartSummary = observer(function CartSummary() {
   const t = useTranslations('Cart');
+  const hasDiscount = hasEffectiveDiscount(cartStore.cart.total, cartStore.cart.discountedTotal);
+
   return (
     <div className="w-auto md:w-96 p-4 border rounded-2xl bg-primary/25 h-fit flex flex-col gap-4">
       <h3 className="text-lg font-bold">{t('Summary')}</h3>
@@ -15,7 +18,7 @@ const CartSummary = observer(function CartSummary() {
         <div>{t('SubTotal')}:</div>
         <div>${cartStore.cart.total.toFixed(2)}</div>
       </div>
-      {cartStore.cart.total > cartStore.cart.discountedTotal && (
+      {hasDiscount && (
         <>
           <div className="font-bold flex justify-between text-red-500">
             <div>{t('Discount')}:</div>

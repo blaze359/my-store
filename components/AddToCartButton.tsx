@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Product } from '@/lib/productTypes';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
+import { useState } from 'react';
+import { Spinner } from './ui/spinner';
 
 type AddToCartButtonProps = {
   product: Product;
@@ -13,10 +15,11 @@ type AddToCartButtonProps = {
 
 export default function AddToCartButton({ product, className }: Readonly<AddToCartButtonProps>) {
   const t = useTranslations('Product');
-  function handleClick() {
-    console.log('Adding to cart:', product);
-    if (!product) return;
-    console.log('clicked add to cart button for product:', product);
+  const [adding, setAdding] = useState(false);
+
+  async function handleClick() {
+    if (!product || adding) return;
+    setAdding(true);
     // Omit quantity, total, discountedTotal — the store handles them
     const cartData = {
       id: product.id,
@@ -26,17 +29,23 @@ export default function AddToCartButton({ product, className }: Readonly<AddToCa
       thumbnail: product.thumbnail,
     };
 
+    await new Promise((resolve) => setTimeout(resolve, 800));
     cartStore.addToCart(cartData, 1);
     toast.success('Added to cart', {
       description: product.title,
-      duration: 2000,
+      duration: 4000,
     });
-    console.log('Current cart state:', cartStore.cart);
+    setAdding(false);
   }
 
   return (
-    <Button className={`${className ?? ''} max-w-60`} onClick={() => handleClick()}>
-      {t('Add to Cart')}
+    <Button
+      className={`${className ?? ''} max-w-60`}
+      onClick={handleClick}
+      disabled={adding}
+      aria-busy={adding}
+    >
+       {adding ? <><Spinner /> {t('Adding')}</> : t('Add to Cart')}
     </Button>
   );
 }

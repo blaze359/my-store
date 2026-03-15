@@ -14,6 +14,16 @@ import {
 } from '@/components/ui/accordion';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useCheckout } from './CheckoutContext';
+import { formatCurrency, hasEffectiveDiscount } from '@/lib/utils';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 
 const CheckoutSummary = observer(function CheckoutSummary() {
   const t = useTranslations('Checkout');
@@ -21,11 +31,14 @@ const CheckoutSummary = observer(function CheckoutSummary() {
   const router = useRouter();
   const { step } = useCheckout();
   const [mounted, setMounted] = useState(false);
+  const [isCheckoutDialogOpen, setIsCheckoutDialogOpen] = useState(false);
   const canCheckout = step >= 4;
+  const hasDiscount = hasEffectiveDiscount(cartStore.cart.total, cartStore.cart.discountedTotal);
   const checkoutButtonClassName =
     'w-full mt-4 bg-primary text-white py-2 rounded hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-primary';
 
   const handleCheckout = () => {
+    setIsCheckoutDialogOpen(false);
     const randomSlug =
       typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
         ? crypto.randomUUID()
@@ -49,7 +62,11 @@ const CheckoutSummary = observer(function CheckoutSummary() {
         </div>
         <hr className="border-secondary" />
         {canCheckout ? (
-          <button type="button" className={checkoutButtonClassName} onClick={handleCheckout}>
+          <button
+            type="button"
+            className={checkoutButtonClassName}
+            onClick={() => setIsCheckoutDialogOpen(true)}
+          >
             {t('Checkout')}
           </button>
         ) : (
@@ -57,6 +74,26 @@ const CheckoutSummary = observer(function CheckoutSummary() {
             {t('Checkout')}
           </button>
         )}
+        <Dialog open={isCheckoutDialogOpen} onOpenChange={setIsCheckoutDialogOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{t('Confirm checkout')}</DialogTitle>
+              <DialogDescription>{t('Confirm Message')}</DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setIsCheckoutDialogOpen(false)}
+              >
+                {t('Cancel')}
+              </Button>
+              <Button type="button" onClick={handleCheckout}>
+                {t('Checkout')}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
         <hr className="border-secondary" />
         <Accordion type="single" collapsible>
           <AccordionItem value="cart" className="border-none">
@@ -94,7 +131,7 @@ const CheckoutSummary = observer(function CheckoutSummary() {
         <div>{t('SubTotal')}:</div>
         <div>${cartStore.cart.total.toFixed(2)}</div>
       </div>
-      {cartStore.cart.total > cartStore.cart.discountedTotal && (
+      {hasDiscount && (
         <>
           <div className="font-bold flex justify-between text-red-500">
             <div>{t('Discount')}:</div>
@@ -108,7 +145,11 @@ const CheckoutSummary = observer(function CheckoutSummary() {
       )}
       <hr className="border-secondary" />
       {canCheckout ? (
-        <button type="button" className={checkoutButtonClassName} onClick={handleCheckout}>
+        <button
+          type="button"
+          className={checkoutButtonClassName}
+          onClick={() => setIsCheckoutDialogOpen(true)}
+        >
           {t('Checkout')}
         </button>
       ) : (
@@ -116,6 +157,22 @@ const CheckoutSummary = observer(function CheckoutSummary() {
           {t('Checkout')}
         </button>
       )}
+      <Dialog open={isCheckoutDialogOpen} onOpenChange={setIsCheckoutDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t('Confirm checkout')}</DialogTitle>
+            <DialogDescription>{t('Confirm Message')}</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button type="button" variant="outline" onClick={() => setIsCheckoutDialogOpen(false)}>
+              {t('Cancel')}
+            </Button>
+            <Button type="button" onClick={handleCheckout}>
+              {t('Checkout')}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <hr className="border-secondary" />
       <Accordion type="single" collapsible>
         <AccordionItem value="cart" className="border-none">
@@ -143,7 +200,9 @@ const CheckoutSummary = observer(function CheckoutSummary() {
                       {t('Qty')}: {item.quantity}
                     </p>
                   </div>
-                  <p className="text-sm font-medium shrink-0">${item.discountedTotal.toFixed(2)}</p>
+                  <p className="text-sm font-medium shrink-0 w-24 text-right tabular-nums">
+                    {formatCurrency(item.discountedTotal, locale)}
+                  </p>
                 </li>
               ))}
             </ul>

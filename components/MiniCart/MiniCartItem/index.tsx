@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { SheetClose } from '@/components/ui/sheet';
 import { useTranslations } from 'next-intl';
 import cartStore from '@/lib/cartStore';
+import { toast } from 'sonner';
 
 interface CartItemData {
   cartItem: CartItem;
@@ -57,7 +58,13 @@ const MiniCartItem = ({ cartItem, closeOnLinkClick = false, onLinkClick }: CartI
             <button
               type="button"
               className="font-medium text-indigo-600 hover:text-indigo-500 cursor-pointer"
-              onClick={() => cartStore.removeFromCart(cartItem.id)}
+              onClick={() => {
+                cartStore.removeFromCart(cartItem.id);
+                toast.error('Removed from cart', {
+                  description: cartItem.title,
+                  duration: 4000,
+                });
+              }}
             >
               {t('Remove')}
             </button>

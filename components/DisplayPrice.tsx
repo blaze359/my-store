@@ -1,4 +1,4 @@
-import { formatCurrency, cn } from '@/lib/utils';
+import { formatCurrency, cn, hasEffectiveDiscount } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
 
 type DisplayPriceProps = {
@@ -17,13 +17,18 @@ export default function DisplayPrice({
   displayPercentage = true,
 }: Readonly<DisplayPriceProps>) {
   const t = useTranslations('Product');
+  const discountedPrice = price - (price * (discountPercentage ?? 0)) / 100;
+  const showDiscountState = Boolean(
+    discountPercentage && hasEffectiveDiscount(price, discountedPrice, locale),
+  );
+
   return (
     <>
-      {discountPercentage ? (
+      {showDiscountState ? (
         <div className={cn('flex gap-2 flex-row', className)}>
           <div className="line-through text-red-800">{formatCurrency(price, locale)}</div>
           {displayPercentage && <div>({discountPercentage}%)</div>}
-          <div>{formatCurrency(price - (price * (discountPercentage ?? 0)) / 100, locale)}</div>
+          <div>{formatCurrency(discountedPrice, locale)}</div>
         </div>
       ) : (
         <div>

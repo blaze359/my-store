@@ -90,8 +90,7 @@ export default observer(() => {
           role="button"
           aria-label="View cart"
         >
-          <button
-            type="button"
+          <div
             className="flex justify-center items-center cursor-pointer bg-transparent border-0 p-0"
             onClick={() => {
               setOpen(false);
@@ -100,7 +99,7 @@ export default observer(() => {
             aria-label="Go to cart"
           >
             <div className="relative py-2">{cartIcon}</div>
-          </button>
+          </div>
         </PopoverTrigger>
         <PopoverContent
           className="w-96"
