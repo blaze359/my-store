@@ -19,7 +19,7 @@ export default function DisplayPrice({
   const t = useTranslations('Product');
   const discountedPrice = price - (price * (discountPercentage ?? 0)) / 100;
   const showDiscountState = Boolean(
-    discountPercentage && hasEffectiveDiscount(price, discountedPrice, locale),
+    discountPercentage && hasEffectiveDiscount(price, discountedPrice, locale)
   );
 
   return (

@@ -35,7 +35,7 @@ function roundToCurrencyPrecision(amount: number, locale: string = 'en'): number
 export function hasEffectiveDiscount(
   originalPrice: number,
   discountedPrice: number,
-  locale: string = 'en',
+  locale: string = 'en'
 ): boolean {
   return (
     discountedPrice < originalPrice &&

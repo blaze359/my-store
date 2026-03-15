@@ -45,7 +45,13 @@ export default function AddToCartButton({ product, className }: Readonly<AddToCa
       disabled={adding}
       aria-busy={adding}
     >
-       {adding ? <><Spinner /> {t('Adding')}</> : t('Add to Cart')}
+      {adding ? (
+        <>
+          <Spinner /> {t('Adding')}
+        </>
+      ) : (
+        t('Add to Cart')
+      )}
     </Button>
   );
 }
