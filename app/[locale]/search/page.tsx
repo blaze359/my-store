@@ -6,9 +6,9 @@ import { redirect } from 'next/navigation';
 
 export default async function SearchPage({
   searchParams,
-}: {
+}: Readonly<{
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
+}>) {
   const t = await getTranslations('Search');
   const resolvedSearchParams = await searchParams;
   const queryParam = resolvedSearchParams.q ?? '';
@@ -17,15 +17,15 @@ export default async function SearchPage({
   const cats = await getCategories();
   const selectedCategory = cats.find(
     (cat: Category) =>
-      cat.name.toLocaleUpperCase().replace(/[,']/g, '') ===
-      query.toLocaleUpperCase().replace(/[,']/g, '')
+      cat.name.toLocaleUpperCase().replaceAll(/[,']/g, '') ===
+      query.toLocaleUpperCase().replaceAll(/[,']/g, '')
   );
 
   if (selectedCategory) {
     redirect(`/products/${selectedCategory.slug}`);
   }
 
-  const searchResults: Product[] = await searchProducts(query as string);
+  const searchResults: Product[] = await searchProducts(query);
   const locale = await getLocale();
 
   return (

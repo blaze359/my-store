@@ -14,8 +14,11 @@ export default function Banner() {
         <Link href={`/${locale}/about`} className="mr-4 hover:text-secondary">
           {t('About This Site')}
         </Link>
-        <Link href={`/${locale}/about/to-do-list`} className="hover:text-secondary">
+        <Link href={`/${locale}/about/to-do-list`} className="mr-4 hover:text-secondary">
           {t('To-Do List')}
+        </Link>
+        <Link href={`/${locale}/about/feedback`} className="mr-4 hover:text-secondary">
+          {t('Feedback')}
         </Link>
       </div>
       <LanguageNav locale={locale} />

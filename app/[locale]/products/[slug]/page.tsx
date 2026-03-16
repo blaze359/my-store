@@ -3,7 +3,9 @@ import ProductCard from '@/components/ProductCard';
 import { Category, Product } from '@/lib/productTypes';
 import { getLocale, getTranslations } from 'next-intl/server';
 
-export default async function ProductList({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ProductList({
+  params,
+}: Readonly<{ params: Promise<{ slug: string }> }>) {
   const { slug } = await params;
   const categories = await getCategories();
   const products = await getProductsByCategory(slug);
