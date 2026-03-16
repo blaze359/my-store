@@ -17,9 +17,7 @@ export interface SubmitFeedbackResult {
   error?: string;
 }
 
-export async function submitFeedback(
-  data: FeedbackFormData
-): Promise<SubmitFeedbackResult> {
+export async function submitFeedback(data: FeedbackFormData): Promise<SubmitFeedbackResult> {
   const { type, name, email, subject, message } = data;
 
   if (!name.trim() || !subject.trim() || !message.trim()) {
@@ -31,7 +29,12 @@ export async function submitFeedback(
     return { success: false, error: 'Please enter a valid email address.' };
   }
 
-  if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS || !process.env.FEEDBACK_EMAIL) {
+  if (
+    !process.env.SMTP_HOST ||
+    !process.env.SMTP_USER ||
+    !process.env.SMTP_PASS ||
+    !process.env.FEEDBACK_EMAIL
+  ) {
     console.error('Feedback email: missing required SMTP environment variables.');
     return { success: false, error: 'Email service is not configured. Please try again later.' };
   }

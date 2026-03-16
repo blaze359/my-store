@@ -71,18 +71,9 @@ export default function FeedbackForm() {
   if (status === 'success') {
     return (
       <div className="rounded-lg border border-green-200 bg-green-50 p-6 text-center dark:border-green-800 dark:bg-green-950">
-        <p className="text-lg font-semibold text-green-800 dark:text-green-200">
-          {t('ThankYou')}
-
-        </p>
-        <p className="mt-1 text-sm text-green-700 dark:text-green-300">
-          {t('WeAppreciate')}
-        </p>
-        <Button
-          variant="outline"
-          className="mt-4"
-          onClick={() => setStatus('idle')}
-        >
+        <p className="text-lg font-semibold text-green-800 dark:text-green-200">{t('ThankYou')}</p>
+        <p className="mt-1 text-sm text-green-700 dark:text-green-300">{t('WeAppreciate')}</p>
+        <Button variant="outline" className="mt-4" onClick={() => setStatus('idle')}>
           {t('SubmitAnother')}
         </Button>
       </div>
